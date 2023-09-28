@@ -65,13 +65,13 @@ class AuthenticationController extends Controller
             'email.required' => 'Email là trường bắt buộc.',
             'email.email' => 'Email không hợp lệ.',
             'password.required' => "Dm đéo điền password à",
-            'password.confirmed' => "Mật khẩu nhập lại không trùng khớp"
+            
         ];
         $validator = Validator::make(
             $request->all(),
             [
                 "email" => 'required|email',
-                "password" => 'required|confirmed|min:8',
+                "password" => 'required|min:8',
             ],
             $customMessages
 
