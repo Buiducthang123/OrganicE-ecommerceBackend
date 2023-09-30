@@ -22,7 +22,7 @@ class AuthenticationController extends Controller
             'name.required' => 'Tên là trường bắt buộc.',
             'name.min' => 'Tên phải có ít nhất 5 ký tự.',
             'phone_number.required'=>'Số điện thoại là trường bắt buộc.',
-            'phone_number.size'=>'Số điện thoại đủ 11 số.',
+            'phone_number.size'=>'Số điện thoại đủ 10 số.',
             'phone_number.unique'=>"Số điện thoại đã được đăng ký",
             'email.required' => 'Email là trường bắt buộc.',
             'email.email' => 'Email không hợp lệ.',
@@ -40,7 +40,7 @@ class AuthenticationController extends Controller
 
         if ($validator->fails()) {
             $errors = $validator->errors();
-            return response()->json(["errors" => $errors], 200);
+            return response()->json(["errors" => $errors], 422);
         } else {
             $user = new User();
             $user->fill($request->all());
