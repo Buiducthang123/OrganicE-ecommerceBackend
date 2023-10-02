@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //register route
 Route::post('/register', [AuthenticationController::class,'register']);
+//Login api
 Route::post('/login',[AuthenticationController::class,'login']);
+//Logout api
 Route::post('/logout',[AuthenticationController::class,'logout'])->middleware('auth:sanctum');
+//get currentUser api
 Route::get('/getUser',[AuthenticationController::class,'getCurrentUser'])->middleware('auth:sanctum');
+//categories api
+Route::resource('/categories', CategoryController::class);
+//Products api
+Route::resource('/product', ProductController::class);
+//Sản phẩm nổi bật (featuredProducts)
+Route::get('/featuredProducts',[ProductController::class,'featuredProducts']);
