@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\category;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class CategoryController extends Controller
 {
     /**
@@ -14,15 +16,14 @@ class CategoryController extends Controller
     {
         //
         $categories = category::all();
-        if ($categories) {
+        if ($categories->isEmpty()) {
             return response()->json([
-                "categories"=>$categories
-            ],200);
+                "message" => "Không có danh mục nào được tìm thấy.",
+            ], 404);
         }
         return response()->json([
-            "message" => "Không có danh mục nào được tìm thấy.",
-        ],404);
-        
+            "categories" => $categories
+        ], 200);
     }
 
     /**
@@ -43,10 +44,20 @@ class CategoryController extends Controller
 
     /**
      * Display the specified resource.
+     * //Hiển thị sản phẩm theo danh mục
      */
     public function show(category $category)
     {
         //
+        $products = $category->products;
+        if ($products->isEmpty()) {
+            return response()->json([
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
+        }
+        return response()->json([
+            "products" => $products
+        ], 200);
     }
 
     /**

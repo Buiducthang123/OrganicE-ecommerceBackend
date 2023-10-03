@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Hamcrest\Type\IsObject;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,14 +15,14 @@ class ProductController extends Controller
     {
         //
         $products = Product::all();
-        if ($products) {
+        if ($products->isEmpty()) {
             return response()->json([
-                "products" => $products
-            ], 200);
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
         }
         return response()->json([
-            "message" => "Không có sản phẩm nào được tìm thấy.",
-        ], 404);
+            "products" => $products
+        ], 200);
     }
 
     //Sản phẩm nổi bật
@@ -32,15 +33,72 @@ class ProductController extends Controller
             ->orderBy('average_rating', 'desc')
             ->limit(4)
             ->get();
-        if ($products) {
+        if ($products->isEmpty()) {
             return response()->json([
-                "products" => $products
-            ], 200);
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
         }
         return response()->json([
-            "message" => "Không có sản phẩm nào được tìm thấy.",
-        ], 404);
+            "products" => $products
+        ], 200);
     }
+
+
+    //sản phẩm bán chạy nhất
+    function bestSellerProducts()
+    {
+        $bestSellers = Product::orderBy('sales_count', 'desc')
+            ->limit(4)
+            ->get();
+        if ($bestSellers->isEmpty()) {
+            return response()->json([
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
+        }
+        return response()->json([
+            "bestSellers" => $bestSellers
+        ], 200);
+    }
+
+    // hiển thị 3 sản phẩm hot deals
+    public function hotDeals()
+    {
+       
+        $products = Product::orderBy('discount', 'desc')->latest()->limit(4)->get();
+    
+        if ($products->isEmpty()) {
+            return response()->json([
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
+        }
+    
+        return response()->json([
+            "products" => $products,
+        ], 200);
+    }
+    //Hiển thị 3 sản phẩm top rated
+    function topRated() {
+        $products = Product::where('average_rating','>=',3.5)->orderBy('sales_count', 'desc')->limit(4)->get();
+    
+        if ($products->isEmpty()) {
+            return response()->json([
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
+        }
+    
+        return response()->json([
+            "products" => $products,
+        ], 200);
+    }
+
+
+
+
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      */

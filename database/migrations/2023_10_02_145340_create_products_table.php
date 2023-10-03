@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('average_rating',[1,2,3,4,5]);
             $table->enum('discount',range(1,100));
             $table->unsignedDouble('weight');
+            $table->unsignedBigInteger('sales_count');
             $table->text('description');
             $table->unsignedDouble('price');
             $table->timestamps();

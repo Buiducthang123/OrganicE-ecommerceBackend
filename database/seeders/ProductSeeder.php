@@ -26,6 +26,7 @@ class ProductSeeder extends Seeder
                 'quantity' => $faker->numberBetween(1, 100),
                 'average_rating' => $faker->randomElement([1, 2, 3, 4, 5]),
                 'discount' => $faker->numberBetween(1, 100),
+                "sales_count"=>$faker->numberBetween(1,1000),
                 'weight' => $faker->randomFloat(2, 0.1, 1000.0),
                 'description' => $faker->sentence,
                 'price' => $faker->randomFloat(2, 10, 1000),
