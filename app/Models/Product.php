@@ -11,4 +11,7 @@ class Product extends Model
     function category() {
         return $this->belongsTo(category::class);
     }
+    function thumbnails(){
+        return $this->hasMany(Thumbnail::class);
+    }
 }

@@ -118,9 +118,18 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::with('thumbnails')->find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+    
+        return response()->json([
+            'product' => $product,
+        ]);
+
     }
 
     /**

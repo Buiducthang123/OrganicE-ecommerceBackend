@@ -24,6 +24,7 @@ class ProductSeeder extends Seeder
                 'name' => $faker->word,
                 'type' => $faker->word,
                 'quantity' => $faker->numberBetween(1, 100),
+                'imageUrl'=>$faker->imageUrl(),
                 'average_rating' => $faker->randomElement([1, 2, 3, 4, 5]),
                 'discount' => $faker->numberBetween(1, 100),
                 "sales_count"=>$faker->numberBetween(1,1000),

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('name');
+            $table->string('imageUrl');
             $table->string('type')->nullable();
             $table->unsignedBigInteger('quantity');
             $table->enum('average_rating',[1,2,3,4,5]);
