@@ -78,7 +78,7 @@ class AuthenticationController extends Controller
         );
         if ($validator->fails()) {
             $errors = $validator->errors();
-            return response()->json(["errors" => $errors], 200);
+            return response()->json(["errors" => $errors], 422);
         } else {
             $email = $request->email;
             $password = $request->password;
@@ -101,7 +101,7 @@ class AuthenticationController extends Controller
                 ], 200);
             }
             else{
-                return response()->json(["errors" => "Tài khoản hoặc mật khẩu éo chính xác"], 200);
+                return response()->json(["errors" => "Tài khoản hoặc mật khẩu không chính xác"], 422);
             }
         }
     }
