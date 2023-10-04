@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,5 @@ Route::get('/featuredProducts',[ProductController::class,'bestSellerProducts']);
 Route::get('/hotDeals',[ProductController::class,'hotDeals']);
 //Top Rated
 Route::get('/topRated',[ProductController::class,'topRated']);
+//Review hien thi danh gia cua khach hang ve trang web
+Route::resource('/reviews',ReviewController::class);
