@@ -29,7 +29,7 @@ Route::post('/login',[AuthenticationController::class,'login']);
 //Logout api
 Route::post('/logout',[AuthenticationController::class,'logout'])->middleware('auth:sanctum');
 //get currentUser api
-Route::get('/getUser',[AuthenticationController::class,'getCurrentUser'])->middleware('auth:sanctum');
+Route::get('/getCurentUser',[AuthenticationController::class,'getCurrentUser'])->middleware('auth:sanctum');
 //categories api---------------------------------------------------------------------------------
 Route::resource('/categories', CategoryController::class);
 //Products api-----------------------------------------------------------------------------------
