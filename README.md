@@ -76,8 +76,6 @@ Các api:
         + api/product: Trả về tất cả các sản phẩm
         + api/product/{product}: Xem chi tiết sản phẩm ( bao gồm cả thumbnails của sản phẩm)
         + api/reviews: Trả về 4 đánh giá của người dùng về trang web
-
-
     - Method: Post:
         + api/login: API đăng nhập
         + api/logout: API đăng xuất
