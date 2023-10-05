@@ -29,7 +29,7 @@ Route::post('/login',[AuthenticationController::class,'login']);
 //Logout api
 Route::post('/logout',[AuthenticationController::class,'logout'])->middleware('auth:sanctum');
 //get currentUser api
-Route::get('/getCurentUser',[AuthenticationController::class,'getCurrentUser'])->middleware('auth:sanctum');
+Route::get('/getCurrentUser',[AuthenticationController::class,'getCurrentUser'])->middleware('auth:sanctum');
 //categories api---------------------------------------------------------------------------------
 Route::resource('/categories', CategoryController::class);
 //Products api-----------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ Route::resource('/product', ProductController::class);
 //Sản phẩm nổi bật (featuredProducts)
 Route::get('/featuredProducts',[ProductController::class,'featuredProducts']);
 //Sản phẩm bán chạy nhất (bestSellerProducts)
-Route::get('/featuredProducts',[ProductController::class,'bestSellerProducts']);
+Route::get('/bestSellerProducts',[ProductController::class,'bestSellerProducts']);
 // Hot deals
 Route::get('/hotDeals',[ProductController::class,'hotDeals']);
 //Top Rated
