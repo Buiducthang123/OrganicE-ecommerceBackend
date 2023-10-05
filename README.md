@@ -65,3 +65,22 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # OrganicE-ecommerceBackend
+<b>Các api:<b/>
+    <ul>
+    Method:Get:
+        <li>api/categories: API trả về danh sách categories</li>
+        <li>api/categories/{category}: Trả về tất cả sản phẩm thuộc category</li>
+        <li>api/featuredProducts: Trả về featureProducts</li>
+        <li>api/getCurrentUser: Trả về User đang đăng nhập</li>
+        <li>api/hotDeals: Trả về sản phẩm hotDeals ( 3 sản phẩm )</li>
+        <li>api/product: Trả về tất cả các sản phẩm</li>
+        <li>api/product/{product}: Xem chi tiết sản phẩm ( bao gồm cả thumbnails của sản phẩm)</li>
+        <li>api/reviews: Trả về 4 đánh giá của người dùng về trang web</li> 
+    </ul>
+    <ul>
+    Method: Post:
+        <li>api/login: API đăng nhập</li>
+        <li>api/logout: API đăng xuất</li>
+        <li>api/register: API đăng ký</li>    
+    </ul>
+    
