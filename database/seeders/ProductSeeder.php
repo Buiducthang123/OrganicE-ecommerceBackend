@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
         //
         $faker = Faker::create();
         $categories_id = category::pluck('id');
-        foreach (range(1, 10) as $index) {
+        foreach (range(1, 100) as $index) {
             Product::create([
                 'category_id' => $faker->randomElement($categories_id),
                 'name' => $faker->word,
