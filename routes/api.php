@@ -27,7 +27,7 @@ Route::post('/register', [AuthenticationController::class,'register']);
 //Login api
 Route::post('/login',[AuthenticationController::class,'login']);
 //Logout api
-Route::post('/logout',[AuthenticationController::class,'logout'])->middleware('auth:sanctum');
+Route::delete('/logout',[AuthenticationController::class,'logout'])->middleware('auth:sanctum');
 //get currentUser api
 Route::get('/getCurrentUser',[AuthenticationController::class,'getCurrentUser'])->middleware('auth:sanctum');
 //categories api---------------------------------------------------------------------------------
