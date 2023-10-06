@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
     {
         //
         $faker = Faker::create();
-        $categories = ["Thực phẩm tươi sống","Thực phẩm khô","đồ uống"];
+        $categories = ["Thực phẩm tươi sống","Thực phẩm khô","đồ uống","Mixedfruits"];
         foreach ($categories as  $value) {
             # code...
             category::create([
