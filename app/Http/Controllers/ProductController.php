@@ -48,7 +48,7 @@ class ProductController extends Controller
     function bestSellerProducts()
     {
         $bestSellers = Product::orderBy('sales_count', 'desc')
-            ->limit(4)
+            ->limit(5)
             ->get();
         if ($bestSellers->isEmpty()) {
             return response()->json([
