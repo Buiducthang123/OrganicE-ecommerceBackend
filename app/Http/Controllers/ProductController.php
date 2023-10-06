@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         // // Lấy 4 sản phẩm có discount và average_rating lớn nhất
         $products = Product::orderBy('average_rating', 'desc')
-            ->orderBy('discount', 'desc')
+            ->orderBy('discount', 'desc')->where('sales_count', '>', '500')
             ->limit(4)
             ->get();
         if ($products->isEmpty()) {
