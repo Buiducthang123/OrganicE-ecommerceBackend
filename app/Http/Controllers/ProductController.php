@@ -29,8 +29,8 @@ class ProductController extends Controller
     function featuredProducts()
     {
         // // Lấy 4 sản phẩm có discount và average_rating lớn nhất
-        $products = Product::orderBy('discount', 'desc')
-            ->orderBy('average_rating', 'desc')
+        $products = Product::orderBy('average_rating', 'desc')
+            ->orderBy('discount', 'desc')
             ->limit(4)
             ->get();
         if ($products->isEmpty()) {
