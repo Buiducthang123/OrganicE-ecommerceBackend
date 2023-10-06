@@ -110,7 +110,6 @@ class AuthenticationController extends Controller
         $agent = new Agent();
         $deviceType = $agent->deviceType();
         $user=Auth::user();
-
         if ($user) {
             $user->tokens()->where('name', $deviceType)->delete();
             return response()->json(['message' => 'Đăng xuất thành công', "deviceType" => $deviceType], 200);
