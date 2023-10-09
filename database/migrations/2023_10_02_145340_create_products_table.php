@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sales_count');
             $table->text('description');
             $table->unsignedDouble('price');
+            $table->string('slug');
             $table->timestamps();
         });
     }

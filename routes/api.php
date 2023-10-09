@@ -47,6 +47,8 @@ Route::get('/topRated',[ProductController::class,'topRated']);
 Route::resource('/reviews',ReviewController::class);
 //Lọc sản phẩm
 Route::get('/filterProducts',[ProductController::class,'handleFilter']);
+//Tìm kiếm sản phẩm
+Route::get('/searchProduct',[ProductController::class,'searchProduct']);
 
 
 

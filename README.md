@@ -94,6 +94,11 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                 </li>
             </ul>
         </li>
+        <li>api/searchProduct: Tìm kiếm sản phẩm theo tên
+            <ul>
+                <li><img src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.15752-9/387488755_323564463594714_2478060476593310063_n.png?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=W7CbylSAqSgAX9QX87l&_nc_ht=scontent.fhan5-2.fna&_nc_e2o=s&oh=03_AdTycbUnz66JrXPYdJZOHxr1Ttvy_FNKqa0APL0rvkizTg&oe=654B7A42"></li>
+            </ul>
+        </li>
     </ul>
 <ul>
     Route: Post:

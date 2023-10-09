@@ -95,7 +95,7 @@ class ProductController extends Controller
     }
 
 
-    //filter func
+    //Lọc sản phẩm
     function handleFilter(Request $request)
     {
         $request->validate([
@@ -133,6 +133,22 @@ class ProductController extends Controller
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Không tìm thấy category'], 404);
         }
+    }
+
+    //Tìm kiếm sản phẩm theo tên
+
+    function searchProduct(Request $request) {
+        $name = $request->input('name');
+        $products = Product::where('name', 'like', '%' . $name . '%')->get();
+        if ($products->isEmpty()) {
+            return response()->json([
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
+        }
+        return response()->json([
+            "products" => $products
+        ], 200);
+
     }
 
     function testFunc(Request $request)
