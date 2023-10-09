@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');//tên danh mục
+            $table->string('slug')->unique(); // Thêm trường slug và đánh dấu là duy nhất (unique)
             $table->string('image');
             $table->timestamps();
         });

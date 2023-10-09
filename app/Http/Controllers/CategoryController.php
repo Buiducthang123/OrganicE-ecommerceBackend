@@ -46,9 +46,12 @@ class CategoryController extends Controller
      * Display the specified resource.
      * //Hiển thị sản phẩm theo danh mục
      */
-    public function show(category $category)
+    public function show($slug)
     {
         //
+        $category = Category::where('id', $slug)
+        ->orWhere('slug', $slug)
+        ->firstOrFail();
         $products = $category->products;
         if ($products->isEmpty()) {
             return response()->json([

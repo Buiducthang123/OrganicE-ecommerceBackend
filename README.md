@@ -70,7 +70,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 <b>Các api:<b/>
     <ul>
-    Method:Get:
+    Route:Get:
         <li>api/categories: API trả về danh sách categories</li>
         <li>api/categories/{category}: Trả về tất cả sản phẩm thuộc category</li>
         <li>api/featuredProducts: Trả về featureProducts</li>
@@ -79,14 +79,28 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
         <li>api/product: Trả về tất cả các sản phẩm</li>
         <li>api/product/{product}: Xem chi tiết sản phẩm ( bao gồm cả thumbnails của sản phẩm)</li>
         <li>api/reviews: Trả về 4 đánh giá của người dùng về trang web</li> 
+        <li>api/filterProducts" lọc sản phẩm
+            <ul>
+                Mô tả 
+                <li>
+                    <img src="https://scontent.fhan5-8.fna.fbcdn.net/v/t1.15752-9/387583222_1068103284110246_8996741958876999568_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=5Xdfx3G5naMAX8164wS&_nc_ht=scontent.fhan5-8.fna&_nc_e2o=s&oh=03_AdS9YnCHzXui9D5mM-RCXZQtsQPMe_jFk96plQT-ffH6gA&oe=654B7B5A">
+                </li>
+                <li>
+                    <img src="https://scontent.fhan5-9.fna.fbcdn.net/v/t1.15752-9/387525071_700266018240312_7259775648934234955_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=rCSb91y3WtgAX_r2pWL&_nc_ht=scontent.fhan5-9.fna&_nc_e2o=s&oh=03_AdRNtQd1thMG9EMeZqRe7UDK2EWnmtnvUtJSD7aalB3EEA&oe=654B6A25">
+                </li>
+                <li>
+                    <p>Nhận vào các trường như ảnh :)) có thể để trống </p>
+                </li>
+            <ul>
+        </li>
     </ul>
     <ul>
-    Method: Post:
+    Route: Post:
         <li>api/login: API đăng nhập</li>
         <li>api/register: API đăng ký</li>    
     </ul>
      <ul>
-    Method: delete:
+    Route: delete:
         <li>api/logout: API đăng xuất</li>  
     </ul>
     

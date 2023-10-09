@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,3 +45,10 @@ Route::get('/hotDeals',[ProductController::class,'hotDeals']);
 Route::get('/topRated',[ProductController::class,'topRated']);
 //Review hien thi danh gia cua khach hang ve trang web
 Route::resource('/reviews',ReviewController::class);
+//Lọc sản phẩm
+Route::get('/filterProducts',[ProductController::class,'handleFilter']);
+
+
+
+
+Route::get('/test',[ProductController::class,'testFunc']);
