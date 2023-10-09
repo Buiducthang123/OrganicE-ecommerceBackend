@@ -95,13 +95,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
             <ul>
         </li>
     </ul>
-    <ul>
+<ul>
     Route: Post:
-        <li>api/login: API đăng nhập</li>
-        <li>api/register: API đăng ký</li>    
-    </ul>
-     <ul>
+    <li>api/login: API đăng nhập</li>
+    <li>api/register: API đăng ký</li>    
+</ul>
+<ul>
     Route: delete:
-        <li>api/logout: API đăng xuất</li>  
-    </ul>
+    <li>api/logout: API đăng xuất</li>  
+</ul>
     
