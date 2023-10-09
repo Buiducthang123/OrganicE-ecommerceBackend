@@ -11,13 +11,13 @@
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
--   [Simple, fast routing engine](https://laravel.com/docs/routing).
--   [Powerful dependency injection container](https://laravel.com/docs/container).
--   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
--   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
--   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
--   [Robust background job processing](https://laravel.com/docs/queues).
--   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
@@ -35,19 +35,19 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ### Premium Partners
 
--   **[Vehikl](https://vehikl.com/)**
--   **[Tighten Co.](https://tighten.co)**
--   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
--   **[64 Robots](https://64robots.com)**
--   **[Cubet Techno Labs](https://cubettech.com)**
--   **[Cyber-Duck](https://cyber-duck.co.uk)**
--   **[Many](https://www.many.co.uk)**
--   **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
--   **[DevSquad](https://devsquad.com)**
--   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
--   **[OP.GG](https://op.gg)**
--   **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
--   **[Lendio](https://lendio.com)**
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[OP.GG](https://op.gg)**
+- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+- **[Lendio](https://lendio.com)**
 
 ## Contributing
 
@@ -64,40 +64,37 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
 # OrganicE-ecommerceBackend
-
 <h1>Học hành là chuyện cả đời. Chơi điii</h1>
 <img src="https://thecaninebuddy.com/wp-content/uploads/2021/08/crying-cat-meme-2048x1152.jpg?ezimgfmt=ng%3Awebp%2Fngcb1%2Frs%3Adevice%2Frscb1-1">
 
 <b>Các api:<b/>
-<ul>
-Route:Get:
-<li>api/categories: API trả về danh sách categories</li>
-<li>api/categories/{category}: Trả về tất cả sản phẩm thuộc category</li>
-<li>api/featuredProducts: Trả về featureProducts</li>
-<li>api/getCurrentUser: Trả về User đang đăng nhập</li>
-<li>api/hotDeals: Trả về sản phẩm hotDeals ( 3 sản phẩm )</li>
-<li>api/product: Trả về tất cả các sản phẩm</li>
-<li>api/product/{product}: Xem chi tiết sản phẩm ( bao gồm cả thumbnails của sản phẩm)</li>
-<li>api/reviews: Trả về 4 đánh giá của người dùng về trang web</li>
-<li>api/filterProducts" lọc sản phẩm
-<ul>
-Mô tả
-<li>
-<img src="https://scontent.fhan5-8.fna.fbcdn.net/v/t1.15752-9/387583222_1068103284110246_8996741958876999568_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=5Xdfx3G5naMAX8164wS&_nc_ht=scontent.fhan5-8.fna&_nc_e2o=s&oh=03_AdS9YnCHzXui9D5mM-RCXZQtsQPMe_jFk96plQT-ffH6gA&oe=654B7B5A">
-</li>
-<li>
-<img src="https://scontent.fhan5-9.fna.fbcdn.net/v/t1.15752-9/387525071_700266018240312_7259775648934234955_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=rCSb91y3WtgAX_r2pWL&_nc_ht=scontent.fhan5-9.fna&_nc_e2o=s&oh=03_AdRNtQd1thMG9EMeZqRe7UDK2EWnmtnvUtJSD7aalB3EEA&oe=654B6A25">
-</li>
-<li>
-<p>Nhận vào các trường như ảnh :)) có thể để trống </p>
-<p>Trả về product đã phân trang ( mặc định 10sp 1 trang)</p>
-</li>
-<ul>
-</li>
-</ul>
-
+    <ul>
+    Route:Get:
+        <li>api/categories: API trả về danh sách categories</li>
+        <li>api/categories/{category}: Trả về tất cả sản phẩm thuộc category</li>
+        <li>api/featuredProducts: Trả về featureProducts</li>
+        <li>api/getCurrentUser: Trả về User đang đăng nhập</li>
+        <li>api/hotDeals: Trả về sản phẩm hotDeals ( 3 sản phẩm )</li>
+        <li>api/product: Trả về tất cả các sản phẩm</li>
+        <li>api/product/{product}: Xem chi tiết sản phẩm ( bao gồm cả thumbnails của sản phẩm)</li>
+        <li>api/reviews: Trả về 4 đánh giá của người dùng về trang web</li> 
+        <li>api/filterProducts" lọc sản phẩm
+            <ul>
+                Mô tả 
+                <li>
+                    <img src="https://scontent.fhan5-8.fna.fbcdn.net/v/t1.15752-9/387583222_1068103284110246_8996741958876999568_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=5Xdfx3G5naMAX8164wS&_nc_ht=scontent.fhan5-8.fna&_nc_e2o=s&oh=03_AdS9YnCHzXui9D5mM-RCXZQtsQPMe_jFk96plQT-ffH6gA&oe=654B7B5A">
+                </li>
+                <li>
+                    <img src="https://scontent.fhan5-9.fna.fbcdn.net/v/t1.15752-9/387525071_700266018240312_7259775648934234955_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=rCSb91y3WtgAX_r2pWL&_nc_ht=scontent.fhan5-9.fna&_nc_e2o=s&oh=03_AdRNtQd1thMG9EMeZqRe7UDK2EWnmtnvUtJSD7aalB3EEA&oe=654B6A25">
+                </li>
+                <li>
+                    <p>Nhận vào các trường như ảnh :)) có thể để trống </p>
+                    <p>Trả về product đã phân trang ( mặc định 10sp 1 trang)</p>
+                </li>
+            </ul>
+        </li>
+    </ul>
 <ul>
     Route: Post:
     <li>api/login: API đăng nhập</li>
@@ -107,3 +104,4 @@ Mô tả
     Route: delete:
     <li>api/logout: API đăng xuất</li>  
 </ul>
+    
