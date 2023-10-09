@@ -90,6 +90,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                 </li>
                 <li>
                     <p>Nhận vào các trường như ảnh :)) có thể để trống </p>
+                    <p>Trả về product đã phân trang ( mặc định 10sp 1 trang)</p>
                 </li>
             <ul>
         </li>
