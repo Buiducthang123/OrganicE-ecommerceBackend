@@ -102,77 +102,84 @@ class ProductController extends Controller
             "price" => "array|size:2",
             "price.*" => "numeric", // Xác thực rằng các phần tử trong mảng là số
         ]);
-        $slug = $request->input('category',null);
+        $slug = $request->input('category', null);
         $price = $request->input('price', []);
-        $rating = $request->input('rating',null);
+        $rating = $request->input('rating', null);
         $page = $request->input('page', 1); // Trang hiện tại, mặc định là 1
         $perPage = $request->input('per_page', 10); // Số sản phẩm trên mỗi trang, mặc định là 10
 
-       
+
 
         try {
-            if ($slug==null) {
-                $query = Product::firstOrFail();
-                
-            } else {
-                $query = Category::where('id', $slug)
+            $query = Product::query();
+
+            if ($slug !== null) {
+                $category = Category::where('id', $slug)
                     ->orWhere('slug', $slug)
-                    ->firstOrFail()->products();
+                    ->firstOrFail();
+                $query->where('category_id', $category->id);
             }
 
-            if ($rating !==null) {
+            if ($rating !== null) {
                 $query->where('average_rating', $rating);
             }
-           
-            if ($price !== null) {
+
+            if ($price !== null && count($price) === 2) {
                 $query->whereBetween('price', $price);
             }
 
-            // $products = $query->paginate($perPage, ['*'], 'page', $page);
-            $products = $query->get();
+            // Sử dụng phân trang để giới hạn kết quả
+            $perPage = $request->input('per_page', 10);
+            $page = $request->input('page', 1);
+
+            $products = $query->with(['thumbnails', 'category'])
+                ->paginate($perPage, ['*'], 'page', $page);
+
             if ($products->isEmpty()) {
-                return response()->json(['message' => "Không có sản phẩm nào"], 404);
+                return response()->json(['message' => 'Không có sản phẩm nào'], 404);
             }
+
             return response()->json(['products' => $products], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Không tìm thấy category'], 404);
         }
-    }
 
-    //Tìm kiếm sản phẩm theo tên
+        //Tìm kiếm sản phẩm theo tên
 
-    function searchProduct(Request $request)
-    {
-        $name = $request->input('name');
-        $products = Product::where('name', 'like', '%' . $name . '%')->get();
-        if ($products->isEmpty()) {
+        function searchProduct(Request $request)
+        {
+            $name = $request->input('name');
+            $products = Product::where('name', 'like', '%' . $name . '%')->get();
+            if ($products->isEmpty()) {
+                return response()->json([
+                    "message" => "Không có sản phẩm nào được tìm thấy.",
+                ], 404);
+            }
             return response()->json([
-                "message" => "Không có sản phẩm nào được tìm thấy.",
-            ], 404);
-        }
-        return response()->json([
-            "products" => $products
-        ], 200);
-    }
-
-    function testFunc(Request $request)
-    {
-        return response()->json($request);
-    }
-
-    //Product quick view
-    function quickView($id){
-        $product = Product::with(['thumbnails', 'category'])
-        ->find($id)->only(['name', 'average_rating', 'description', 'price', 'discount','thumbnails','category']);
-    
-
-        if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
+                "products" => $products
+            ], 200);
         }
 
-        return response()->json([
-            'product' => $product,
-        ], 200);
+        function testFunc(Request $request)
+        {
+            return response()->json($request);
+        }
+
+        //Product quick view
+        function quickView($id)
+        {
+            $product = Product::with(['thumbnails', 'category'])
+                ->find($id)->only(['name', 'average_rating', 'description', 'price', 'discount', 'thumbnails', 'category']);
+
+
+            if (!$product) {
+                return response()->json(['message' => 'Product not found'], 404);
+            }
+
+            return response()->json([
+                'product' => $product,
+            ], 200);
+        }
     }
 
 
