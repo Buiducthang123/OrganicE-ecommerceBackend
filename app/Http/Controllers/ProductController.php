@@ -101,11 +101,10 @@ class ProductController extends Controller
         $request->validate([
             "price" => "array|size:2",
             "price.*" => "numeric", // Xác thực rằng các phần tử trong mảng là số
-            "rating" => "between:1,5"
         ]);
-        $slug = $request->input('category');
+        $slug = $request->input('category',false);
         $price = $request->input('price', []);
-        $rating = $request->input('rating');
+        $rating = $request->input('rating',null);
         $page = $request->input('page', 1); // Trang hiện tại, mặc định là 1
         $perPage = $request->input('per_page', 10); // Số sản phẩm trên mỗi trang, mặc định là 10
 
@@ -121,10 +120,10 @@ class ProductController extends Controller
                     ->firstOrFail()->products();
             }
 
-            if ($rating !== null) {
+            if ($rating !==null) {
                 $query->where('average_rating', $rating);
             }
-
+           
             if ($price !== null) {
                 $query->whereBetween('price', $price);
             }
@@ -134,7 +133,6 @@ class ProductController extends Controller
             if ($products->isEmpty()) {
                 return response()->json(['message' => "Không có sản phẩm nào"], 404);
             }
-
             return response()->json(['products' => $products], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Không tìm thấy category'], 404);
@@ -160,6 +158,22 @@ class ProductController extends Controller
     function testFunc(Request $request)
     {
         return response()->json($request);
+    }
+
+    //Product quick view
+    function quickView($id){
+        $product = Product::with(['thumbnails', 'category'])
+        ->only(['name', 'average_rating', 'description', 'price', 'discount'])
+        ->find($id);
+    
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        return response()->json([
+            'product' => $product,
+        ], 200);
     }
 
 

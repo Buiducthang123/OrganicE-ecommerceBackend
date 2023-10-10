@@ -49,7 +49,8 @@ Route::resource('/reviews',ReviewController::class);
 Route::get('/filterProducts',[ProductController::class,'handleFilter']);
 //Tìm kiếm sản phẩm
 Route::get('/searchProduct',[ProductController::class,'searchProduct']);
-
+//Product quickView
+Route::get('/quickView/{id}',[ProductController::class,'quickView']);
 
 
 
