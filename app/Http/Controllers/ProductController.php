@@ -103,17 +103,23 @@ class ProductController extends Controller
             "price.*" => "numeric", // Xác thực rằng các phần tử trong mảng là số
             "rating" => "between:1,5"
         ]);
-        $slug = $request->input('category', [1]);
+        $slug = $request->input('category');
         $price = $request->input('price', []);
         $rating = $request->input('rating');
         $page = $request->input('page', 1); // Trang hiện tại, mặc định là 1
         $perPage = $request->input('per_page', 10); // Số sản phẩm trên mỗi trang, mặc định là 10
 
 
+
         try {
-            $query = Category::where('id', $slug)
-            ->orWhere('slug', $slug)
-            ->firstOrFail()->products();
+            if (!$slug) {
+                $query = Category::all()
+                    ->firstOrFail()->products();
+            } else {
+                $query = Category::where('id', $slug)
+                    ->orWhere('slug', $slug)
+                    ->firstOrFail()->products();
+            }
 
             if ($rating !== null) {
                 $query->where('average_rating', $rating);
@@ -137,7 +143,8 @@ class ProductController extends Controller
 
     //Tìm kiếm sản phẩm theo tên
 
-    function searchProduct(Request $request) {
+    function searchProduct(Request $request)
+    {
         $name = $request->input('name');
         $products = Product::where('name', 'like', '%' . $name . '%')->get();
         if ($products->isEmpty()) {
@@ -148,7 +155,6 @@ class ProductController extends Controller
         return response()->json([
             "products" => $products
         ], 200);
-
     }
 
     function testFunc(Request $request)
