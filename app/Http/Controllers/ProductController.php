@@ -7,6 +7,7 @@ use App\Models\Product;
 use Hamcrest\Type\IsObject;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -104,15 +105,30 @@ class ProductController extends Controller
         $page = $request->input('page', 1); // Trang hiện tại, mặc định là 1
         $perPage = $request->input('per_page', 10); // Số sản phẩm trên mỗi trang, mặc định là 10
 
-
-
         try {
-            $query = Product::query();
+            $query = Product::select(
+                'id',
+                'name',
+                'average_rating',
+                'description',
+                'price',
+                'discount',
+                DB::raw('price * (1 - discount / 100) as price')
+            );
 
             if ($slug !== null) {
                 $category = Category::where('id', $slug)
                     ->orWhere('slug', $slug)
-                    ->firstOrFail();
+                    ->select(
+                        'id',
+                        'name',
+                        'average_rating',
+                        'description',
+                        'price',
+                        'discount',
+                        DB::raw('price * (1 - discount / 100) as price')
+                    );
+
                 $query->where('category_id', $category->id);
             }
 
