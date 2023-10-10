@@ -98,10 +98,6 @@ class ProductController extends Controller
     //Lọc sản phẩm
     function handleFilter(Request $request)
     {
-        $request->validate([
-            "price" => "array|size:2",
-            "price.*" => "numeric", // Xác thực rằng các phần tử trong mảng là số
-        ]);
         $slug = $request->input('category', null);
         $price = $request->input('price', []);
         $rating = $request->input('rating', null);
@@ -124,7 +120,7 @@ class ProductController extends Controller
                 $query->where('average_rating', $rating);
             }
 
-            if ($price !== null && count($price) === 2) {
+            if (!empty($price) && count($price) === 2) {
                 $query->whereBetween('price', $price);
             }
 
@@ -145,42 +141,42 @@ class ProductController extends Controller
         }
 
         //Tìm kiếm sản phẩm theo tên
-
-        function searchProduct(Request $request)
-        {
-            $name = $request->input('name');
-            $products = Product::where('name', 'like', '%' . $name . '%')->get();
-            if ($products->isEmpty()) {
-                return response()->json([
-                    "message" => "Không có sản phẩm nào được tìm thấy.",
-                ], 404);
-            }
-            return response()->json([
-                "products" => $products
-            ], 200);
-        }
-
-        function testFunc(Request $request)
-        {
-            return response()->json($request);
-        }
-
-        //Product quick view
-        function quickView($id)
-        {
-            $product = Product::with(['thumbnails', 'category'])
-                ->find($id)->only(['name', 'average_rating', 'description', 'price', 'discount', 'thumbnails', 'category']);
-
-
-            if (!$product) {
-                return response()->json(['message' => 'Product not found'], 404);
-            }
-
-            return response()->json([
-                'product' => $product,
-            ], 200);
-        }
     }
+    function searchProduct(Request $request)
+    {
+        $name = $request->input('name');
+        $products = Product::where('name', 'like', '%' . $name . '%')->get();
+        if ($products->isEmpty()) {
+            return response()->json([
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
+        }
+        return response()->json([
+            "products" => $products
+        ], 200);
+    }
+
+    function testFunc(Request $request)
+    {
+        return response()->json($request);
+    }
+
+    //Product quick view
+    function quickView($id)
+    {
+        $product = Product::with(['thumbnails', 'category'])
+            ->find($id)->only(['name', 'average_rating', 'description', 'price', 'discount', 'thumbnails', 'category']);
+
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        return response()->json([
+            'product' => $product,
+        ], 200);
+    }
+
 
 
 
