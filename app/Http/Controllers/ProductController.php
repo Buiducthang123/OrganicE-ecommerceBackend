@@ -102,18 +102,18 @@ class ProductController extends Controller
             "price" => "array|size:2",
             "price.*" => "numeric", // Xác thực rằng các phần tử trong mảng là số
         ]);
-        $slug = $request->input('category',false);
+        $slug = $request->input('category',null);
         $price = $request->input('price', []);
         $rating = $request->input('rating',null);
         $page = $request->input('page', 1); // Trang hiện tại, mặc định là 1
         $perPage = $request->input('per_page', 10); // Số sản phẩm trên mỗi trang, mặc định là 10
 
-
+       
 
         try {
-            if (!$slug) {
-                $query = Category::all()
-                    ->firstOrFail()->products();
+            if ($slug==null) {
+                $query = Product::firstOrFail();
+                
             } else {
                 $query = Category::where('id', $slug)
                     ->orWhere('slug', $slug)
@@ -128,8 +128,8 @@ class ProductController extends Controller
                 $query->whereBetween('price', $price);
             }
 
-            $products = $query->paginate($perPage, ['*'], 'page', $page);
-
+            // $products = $query->paginate($perPage, ['*'], 'page', $page);
+            $products = $query->get();
             if ($products->isEmpty()) {
                 return response()->json(['message' => "Không có sản phẩm nào"], 404);
             }
