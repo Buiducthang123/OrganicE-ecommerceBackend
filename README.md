@@ -65,7 +65,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # OrganicE-ecommerceBackend
-<h1>Học hành là chuyện cả đời. Chơi điii</h1>
+<h1>Học hành là chuyện cả đời. T đi chơi game mai fix </h1>
 <img src="https://thecaninebuddy.com/wp-content/uploads/2021/08/crying-cat-meme-2048x1152.jpg?ezimgfmt=ng%3Awebp%2Fngcb1%2Frs%3Adevice%2Frscb1-1">
 
 <b>Các api:<b/>
