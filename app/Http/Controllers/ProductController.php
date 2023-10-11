@@ -113,7 +113,8 @@ class ProductController extends Controller
                 'description',
                 'price',
                 'discount',
-                DB::raw('price * (1 - discount / 100) as price')
+                'price',
+                DB::raw('price * (1 - discount / 100) as current_Price')
             );
 
             if ($slug !== null) {
@@ -126,7 +127,8 @@ class ProductController extends Controller
                         'description',
                         'price',
                         'discount',
-                        DB::raw('price * (1 - discount / 100) as price')
+                        'price',
+                        DB::raw('price * (1 - discount / 100) as current_Price')
                     );
 
                 $query->where('category_id', $category->id);
