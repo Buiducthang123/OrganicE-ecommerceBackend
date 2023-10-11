@@ -115,6 +115,7 @@ class ProductController extends Controller
                 'imageUrl',
                 'discount',
                 'price',
+                'category_id',
                 DB::raw('price * (1 - discount / 100) as current_Price')
             );
 
@@ -130,24 +131,27 @@ class ProductController extends Controller
                     'price',
                     'imageUrl',
                     'discount',
-                    'price',
-                    DB::raw('price * (1 - discount / 100) as current_Price')
+                    'category_id',
+                    DB::raw('price * (1 - discount / 100) as current_price')
                 );
-            }
+            }                 
 
             if ($rating !== null) {
                 $query->where('average_rating', $rating);
             }
 
             if (!empty($price) && count($price) === 2) {
-                $query->whereBetween('price', $price);
+                
+                $query->whereBetween(DB::raw('price * (1 - discount / 100)'), $price);
             }
 
             // Sử dụng phân trang để giới hạn kết quả
             $perPage = $request->input('per_page', 10);
             $page = $request->input('page', 1);
 
-            $products = $query->with(['thumbnails', 'category'])
+            $products = $query->with(['thumbnails', 'category'=> function ($categoryQuery) {
+                $categoryQuery->select('id','name'); // Chọn các cột của danh mục
+            }])
                 ->paginate($perPage, ['*'], 'page', $page);
 
             if ($products->isEmpty()) {
