@@ -133,21 +133,6 @@ class ProductController extends Controller
                     'price',
                     DB::raw('price * (1 - discount / 100) as current_Price')
                 );
-                // $query = Category::where('id', $slug)
-                //     ->orWhere('slug', $slug)
-                //     ->products;
-                    // ->select(
-                    //     'id',
-                    //     'name',
-                    //     'average_rating',
-                    //     'description',
-                    //     'price',
-                    //     'discount',
-                    //     'price',
-                    //     DB::raw('price * (1 - discount / 100) as current_Price')
-                    // );
-
-                // $query->where('category_id', $category->id);
             }
 
             if ($rating !== null) {
@@ -173,9 +158,8 @@ class ProductController extends Controller
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Không tìm thấy category'], 404);
         }
-
-        //Tìm kiếm sản phẩm theo tên
     }
+    //Tìm kiếm sản phẩm theo tên
     function searchProduct(Request $request)
     {
         $name = $request->input('name');
@@ -238,16 +222,24 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('thumbnails')->find($id);
-        $category_id = $product->category->id;
-        $sameProducts = Product::with('category')->where("category_id",$category_id)->where("id","!=",$id)->limit(5)->only(['name', 'average_rating', 'description', 'price', 'discount' , 'category'])->get();
+
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
 
+        $category_id = $product->category->id;
+
+        $sameProducts = Product::with('category')
+            ->where('category_id', $category_id)
+            ->where('id', '!=', $id)
+            ->limit(5)
+            ->select('name', 'average_rating', 'description', 'price', 'discount', 'category_id')
+            ->get();
+
         return response()->json([
             'product' => $product,
             // 'category_id'=>$category_id
-            "sameProducts"=>$sameProducts
+            "sameProducts" => $sameProducts
         ], 200);
     }
 
