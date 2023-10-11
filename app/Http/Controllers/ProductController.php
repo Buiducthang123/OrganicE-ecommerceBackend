@@ -112,26 +112,42 @@ class ProductController extends Controller
                 'average_rating',
                 'description',
                 'price',
+                'imageUrl',
                 'discount',
                 'price',
                 DB::raw('price * (1 - discount / 100) as current_Price')
             );
 
             if ($slug !== null) {
-                $category = Category::where('id', $slug)
-                    ->orWhere('slug', $slug)
-                    ->select(
-                        'id',
-                        'name',
-                        'average_rating',
-                        'description',
-                        'price',
-                        'discount',
-                        'price',
-                        DB::raw('price * (1 - discount / 100) as current_Price')
-                    );
+                $query = Product::whereHas('category', function ($categoryQuery) use ($slug) {
+                    $categoryQuery->where('id', $slug)
+                        ->orWhere('slug', $slug);
+                })->select(
+                    'id',
+                    'name',
+                    'average_rating',
+                    'description',
+                    'price',
+                    'imageUrl',
+                    'discount',
+                    'price',
+                    DB::raw('price * (1 - discount / 100) as current_Price')
+                );
+                // $query = Category::where('id', $slug)
+                //     ->orWhere('slug', $slug)
+                //     ->products;
+                    // ->select(
+                    //     'id',
+                    //     'name',
+                    //     'average_rating',
+                    //     'description',
+                    //     'price',
+                    //     'discount',
+                    //     'price',
+                    //     DB::raw('price * (1 - discount / 100) as current_Price')
+                    // );
 
-                $query->where('category_id', $category->id);
+                // $query->where('category_id', $category->id);
             }
 
             if ($rating !== null) {
@@ -222,13 +238,16 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('thumbnails')->find($id);
-
+        $category_id = $product->category->id;
+        $sameProducts = Product::with('category')->where("category_id",$category_id)->where("id","!=",$id)->limit(5)->only(['name', 'average_rating', 'description', 'price', 'discount' , 'category'])->get();
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
 
         return response()->json([
             'product' => $product,
+            // 'category_id'=>$category_id
+            "sameProducts"=>$sameProducts
         ], 200);
     }
 
