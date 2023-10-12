@@ -150,7 +150,7 @@ class ProductController extends Controller
             $page = $request->input('page', 1);
 
             $products = $query->with(['thumbnails', 'category'=> function ($categoryQuery) {
-                $categoryQuery->select('id','name'); // Chọn các cột của danh mục
+                $categoryQuery->select('name'); // Chọn các cột của danh mục
             }])
                 ->paginate($perPage, ['*'], 'page', $page);
 

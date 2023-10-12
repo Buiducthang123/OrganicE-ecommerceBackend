@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,8 +47,11 @@ class AuthenticationController extends Controller
             $user->fill($request->all());
             $user->password = Hash::make($request['password']);
             $user->save();
-            Auth::login($user);
             $agent = new Agent();
+            Auth::login($user);
+            $cart = new Cart();
+            $cart->user_id = $user->id;
+            $cart->save();
             // Lấy thông tin kiểu thiết bị đăng nhập
             $deviceType = $agent->deviceType();
             $token = $user->createToken($deviceType)->plainTextToken;

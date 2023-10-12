@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
@@ -52,6 +54,11 @@ Route::get('/searchProduct',[ProductController::class,'searchProduct']);
 //Product quickView
 Route::get('/quickView/{id}',[ProductController::class,'quickView']);
 
+// ---------------------------------------------------------------------------/
+//Thêm sản phẩm vào giỏ hàng
+Route::resource('/cartItem', CartItemController::class)->middleware('auth:sanctum');
+//
+Route::resource('/cart', CartController::class)->middleware('auth:sanctum');
 
 
 Route::get('/test',[ProductController::class,'testFunc']);
