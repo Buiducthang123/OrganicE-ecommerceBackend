@@ -146,7 +146,7 @@ class ProductController extends Controller
             }
 
             // Sử dụng phân trang để giới hạn kết quả
-            $perPage = $request->input('per_page', 10);
+            $perPage = $request->input('per_page', 9);
             $page = $request->input('page', 1);
 
             $products = $query->with(['thumbnails', 'category'=> function ($categoryQuery) {
