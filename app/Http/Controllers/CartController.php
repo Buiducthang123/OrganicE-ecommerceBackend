@@ -18,14 +18,11 @@ class CartController extends Controller
         if (Auth::check()) {
             // Người dùng đã đăng nhập
             $user = Auth::user();
-            $cartItems = $user->cart->products;
-            $c = Cart::find(11)->products;
-            
+            $cartItems = $user->cart->products; 
             return response()->json(['cart'=>$cartItems]);
         } else {
             // Người dùng chưa đăng nhập
             return response()->json([
-                'error' => 'Unauthorized',
                 'message' => 'Bạn cần đăng nhập để truy cập tài nguyên này.',
             ], 401);
         }
