@@ -18,7 +18,8 @@ class CartController extends Controller
         if (Auth::check()) {
             // Người dùng đã đăng nhập
             $user = Auth::user();
-            $cartItems = $user->cart->cartItems;
+            $cartItems = $user->cart->products;
+            $c = Cart::find(11)->products;
             
             return response()->json(['cart'=>$cartItems]);
         } else {

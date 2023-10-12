@@ -11,4 +11,5 @@ class CartItem extends Model
     function cart() {
         return $this->hasOne(Cart::class);
     }
+
 }

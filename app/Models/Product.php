@@ -30,4 +30,8 @@ class Product extends Model
     function thumbnails(){
         return $this->hasMany(Thumbnail::class);
     }
+
+    function carts() {
+        return $this->belongsToMany(Cart::class,'cart_items','cart_id','product_id');
+    }
 }
