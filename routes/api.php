@@ -66,7 +66,6 @@ Route::resource('/cartItem', CartItemController::class)->middleware('auth:sanctu
 Route::prefix('cart')->middleware('auth:sanctum')->group(function () {
     // Tuyến đường cho giỏ hàng
     Route::resource('/', CartController::class);
-
     // Tuyến đường cho thông tin nhanh giỏ hàng
     Route::get("quick_infor", [CartController::class, 'quickInfor']);
 });

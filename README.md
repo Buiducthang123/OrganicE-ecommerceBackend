@@ -73,13 +73,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     Route:Get:
         <li>api/categories: API trả về danh sách categories</li>
         <li>api/categories/{category}: Trả về tất cả sản phẩm thuộc category</li>
-        <li>api/featuredProducts: Trả về featureProducts</li>
+        <li>api/product/featuredProducts: Trả về featureProducts</li>
         <li>api/getCurrentUser: Trả về User đang đăng nhập</li>
-        <li>api/hotDeals: Trả về sản phẩm hotDeals ( 3 sản phẩm )</li>
-        <li>api/product: Trả về tất cả các sản phẩm</li>
+        <li>api/product/hotDeals: Trả về sản phẩm hotDeals ( 3 sản phẩm )</li>
+        <li>api/product/: Trả về tất cả các sản phẩm</li>
         <li>api/product/{product}: Xem chi tiết sản phẩm ( bao gồm cả thumbnails của sản phẩm)</li>
         <li>api/reviews: Trả về 4 đánh giá của người dùng về trang web</li> 
-        <li>api/filterProducts" lọc sản phẩm
+        <li>api/product/filterProducts" lọc sản phẩm
             <ul>
                 Mô tả 
                 <li>
@@ -94,13 +94,14 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                 </li>
             </ul>
         </li>
-        <li>api/searchProduct: Tìm kiếm sản phẩm theo tên
+        <li>api/product/searchProduct: Tìm kiếm sản phẩm theo tên
             <ul>
                 <li><img src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.15752-9/387488755_323564463594714_2478060476593310063_n.png?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=W7CbylSAqSgAX9QX87l&_nc_ht=scontent.fhan5-2.fna&_nc_e2o=s&oh=03_AdTycbUnz66JrXPYdJZOHxr1Ttvy_FNKqa0APL0rvkizTg&oe=654B7A42"></li>
             </ul>
         </li>
-        <li>api/quickView: Hiển thị thông tin nhanh sản phẩm</li>
+        <li>api/product/quickView: Hiển thị thông tin nhanh sản phẩm</li>
         <li>api/cart: Hiển thị tất cả sản phẩm trong giỏ hàng</li>
+        <li>api/cart/quick_infor: Hiển thị thông tin nhanh sản phẩm trong giỏ hàng</li>
     </ul>
 <ul>
     Route: Post:
