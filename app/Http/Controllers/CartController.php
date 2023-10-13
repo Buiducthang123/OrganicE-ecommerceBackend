@@ -14,12 +14,12 @@ class CartController extends Controller
      */
     public function index()
     {
-       
+
         if (Auth::check()) {
             // Người dùng đã đăng nhập
             $user = Auth::user();
-            $cartItems = $user->cart->products; 
-            return response()->json(['cart'=>$cartItems]);
+            $cartItems = $user->cart->products;
+            return response()->json(['cart' => $cartItems]);
         } else {
             // Người dùng chưa đăng nhập
             return response()->json([
@@ -27,6 +27,21 @@ class CartController extends Controller
             ], 401);
         }
     }
+
+    //Hiển thị thông tin nhanh của giỏ hàng (tên/ ảnh/ số lượng/ giá)
+    function quick_infor()
+    {
+        if (Auth::check()) {
+
+            $cart_info = Auth::user()->cart;
+           
+            $products = $cart_info->products()->select('name','price','imageUrl','weight','discount')->get();
+
+            return response()->json($products);
+        }
+        return response()->json(["message" => "Chưa đăng nhập"], 401);
+    }
+
 
     /**
      * Show the form for creating a new resource.

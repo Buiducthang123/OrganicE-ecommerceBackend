@@ -9,6 +9,11 @@ use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
+    protected $appends = ['current_price'];
+
+    public function getCurrentPriceAttribute() {
+        return $this->price * (1 - $this->discount / 100);
+    }
     protected static function boot()
     {
         parent::boot();
@@ -32,6 +37,7 @@ class Product extends Model
     }
 
     function carts() {
-        return $this->belongsToMany(Cart::class,'cart_items','cart_id','product_id');
+        return $this->belongsToMany(Cart::class,'cart_items','cart_id','product_id') ->withPivot('quantity');
     }
+
 }

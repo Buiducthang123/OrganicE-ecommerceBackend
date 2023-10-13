@@ -59,6 +59,7 @@ Route::get('/quickView/{id}',[ProductController::class,'quickView']);
 Route::resource('/cartItem', CartItemController::class)->middleware('auth:sanctum');
 //
 Route::resource('/cart', CartController::class)->middleware('auth:sanctum');
-
+//Thông tin nhanh giỏ hàng
+Route::get('/quick_infor',[CartController::class,'quick_infor'])->middleware('auth:sanctum');
 
 Route::get('/test',[ProductController::class,'testFunc']);

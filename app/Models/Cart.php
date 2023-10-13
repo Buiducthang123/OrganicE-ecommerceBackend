@@ -12,6 +12,7 @@ class Cart extends Model
 {
     use HasFactory;
    
+   
     function user() {
         return $this->hasOne(User::class);
     }
@@ -20,7 +21,9 @@ class Cart extends Model
         return $this->hasMany(CartItem::class);
     }
     function products() {
-        return $this->belongsToMany(Product::class,'cart_items','cart_id','product_id');
+        return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')
+            ->withPivot('quantity'); // Lấy trường 'quantity' từ bảng trung gian
     }
+    
 
 }
