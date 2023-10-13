@@ -60,6 +60,6 @@ Route::resource('/cartItem', CartItemController::class)->middleware('auth:sanctu
 //
 Route::resource('/cart', CartController::class)->middleware('auth:sanctum');
 //Thông tin nhanh giỏ hàng
-Route::get('/quick_infor',[CartController::class,'quick_infor'])->middleware('auth:sanctum');
+Route::get("cart/quick-infor",[CartController::class,'quick_infor'])->middleware('auth:sanctum');
 
-Route::get('/test',[ProductController::class,'testFunc']);
+Route::get('/carttt/a',[ProductController::class,'testFunc']);
