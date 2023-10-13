@@ -29,7 +29,7 @@ class CartController extends Controller
     }
 
     //Hiển thị thông tin nhanh của giỏ hàng (tên/ ảnh/ số lượng/ giá)
-    function quick_infor()
+    function quickInfor()
     {
         if (Auth::check()) {
 
