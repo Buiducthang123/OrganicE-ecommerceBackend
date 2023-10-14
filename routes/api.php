@@ -6,6 +6,7 @@ use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\WishListController;
 use Illuminate\Http\Request;
 // use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -69,3 +70,7 @@ Route::prefix('cart')->middleware('auth:sanctum')->group(function () {
     // Tuyến đường cho thông tin nhanh giỏ hàng
     Route::get("quick_infor", [CartController::class, 'quickInfor']);
 });
+
+
+//Danh sách sản phẩm yêu thích
+Route::resource('wish_list', WishListController::class)->middleware('auth:sanctum');

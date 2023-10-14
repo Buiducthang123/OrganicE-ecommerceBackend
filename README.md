@@ -102,6 +102,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
         <li>api/product/quickView: Hiển thị thông tin nhanh sản phẩm</li>
         <li>api/cart: Hiển thị tất cả sản phẩm trong giỏ hàng</li>
         <li>api/cart/quick_infor: Hiển thị thông tin nhanh sản phẩm trong giỏ hàng</li>
+        <li>/api/wish_list: Hiển thị sản phẩm yêu thích</li>
     </ul>
 <ul>
     Route: Post:
@@ -114,6 +115,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 </ul>
 <ul>
     Route: delete:
-    <li>api/logout: API đăng xuất</li>  
+    <li>api/logout: API đăng xuất</li>
+    <li>api/wish_list/{product_id}: Xóa sản phẩm khỏi danh sách yêu thích</li>  
 </ul>
-    
+

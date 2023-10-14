@@ -49,6 +49,9 @@ class User extends Authenticatable
         return $this->hasOne(Cart::class);
     }
    
+    function productswishList() {
+        return $this->belongsToMany(Product::class,'wish_lists');
+    }
 
    
 }
