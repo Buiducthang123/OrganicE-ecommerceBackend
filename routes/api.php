@@ -39,9 +39,9 @@ Route::resource('/categories', CategoryController::class);
 //Products api-----------------------------------------------------------------------------------
 
 
-
-Route::prefix('product')->group(function () {
-    Route::resource('/', ProductController::class);
+Route::resource('/product', ProductController::class)->names('products');
+Route::prefix('products')->group(function () {
+    
     //Sản phẩm nổi bật (featuredProducts)
     Route::get('/featuredProducts', [ProductController::class, 'featuredProducts']);
     //Sản phẩm bán chạy nhất (bestSellerProducts)
@@ -64,9 +64,9 @@ Route::resource('/reviews', ReviewController::class);
 //Thêm sản phẩm vào giỏ hàng
 Route::resource('/cartItem', CartItemController::class)->middleware('auth:sanctum');
 //
-Route::prefix('cart')->middleware('auth:sanctum')->group(function () {
+Route::resource('cart', CartController::class);
+Route::prefix('carts')->middleware('auth:sanctum')->group(function () {
     // Tuyến đường cho giỏ hàng
-    Route::resource('/', CartController::class);
     // Tuyến đường cho thông tin nhanh giỏ hàng
     Route::get("quick_infor", [CartController::class, 'quickInfor']);
 });

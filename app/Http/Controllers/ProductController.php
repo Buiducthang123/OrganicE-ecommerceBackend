@@ -223,9 +223,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show( $product_id )
     {
-        $product = Product::with('thumbnails')->find($id);
+        
+        $product = Product::with('thumbnails')->find($product_id);
 
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
@@ -235,7 +236,7 @@ class ProductController extends Controller
 
         $sameProducts = Product::with('category')
             ->where('category_id', $category_id)
-            ->where('id', '!=', $id)
+            ->where('id', '!=', $product_id)
             ->limit(5)
             ->select('name', 'average_rating', 'description', 'price', 'discount', 'category_id')
             ->get();
