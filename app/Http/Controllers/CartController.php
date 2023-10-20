@@ -19,7 +19,11 @@ class CartController extends Controller
             // Người dùng đã đăng nhập
             $user = Auth::user();
             $cartItems = $user->cart->products;
-            return response()->json(['cart' => $cartItems]);
+            if(count($cartItems) > 0) {
+                return response()->json(['cart' => $cartItems]);
+            }
+            return response()->json(['message'=> ["Không có sản phẩm nào trong giỏ hàng"]]);
+
         } else {
             // Người dùng chưa đăng nhập
             return response()->json([
