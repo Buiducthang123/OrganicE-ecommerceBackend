@@ -64,7 +64,7 @@ Route::resource('/reviews', ReviewController::class);
 //Thêm sản phẩm vào giỏ hàng
 Route::resource('/cartItem', CartItemController::class)->middleware('auth:sanctum');
 //
-Route::resource('cart', CartController::class);
+Route::resource('cart', CartController::class)->middleware('auth:sanctum');
 Route::prefix('carts')->middleware('auth:sanctum')->group(function () {
     // Tuyến đường cho giỏ hàng
     // Tuyến đường cho thông tin nhanh giỏ hàng

@@ -24,6 +24,4 @@ class Cart extends Model
         return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')
             ->withPivot('quantity'); // Lấy trường 'quantity' từ bảng trung gian
     }
-    
-
 }
