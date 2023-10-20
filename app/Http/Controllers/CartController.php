@@ -23,7 +23,6 @@ class CartController extends Controller
                 return response()->json(['cart' => $cartItems]);
             }
             return response()->json(['message'=> ["Không có sản phẩm nào trong giỏ hàng"]]);
-
         } else {
             // Người dùng chưa đăng nhập
             return response()->json([

@@ -187,7 +187,7 @@ class ProductController extends Controller
     function quickView($id)
     {
         $product = Product::with(['thumbnails', 'category'])
-            ->find($id)->only(['name', 'average_rating', 'description', 'price','imageUrl', 'discount', 'thumbnails', 'category' ]); 
+            ->find($id)->only(['id','name', 'average_rating', 'description', 'price','imageUrl', 'discount', 'thumbnails', 'category' ]); 
 
 
         if (!$product) {
@@ -238,7 +238,7 @@ class ProductController extends Controller
             ->where('category_id', $category_id)
             ->where('id', '!=', $product_id)
             ->limit(5)
-            ->select('name', 'average_rating', 'description', 'price', 'discount', 'category_id')
+            ->select('id','name', 'average_rating', 'description', 'price', 'discount', 'category_id')
             ->get();
 
         return response()->json([
