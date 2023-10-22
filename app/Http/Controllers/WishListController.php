@@ -7,6 +7,8 @@ use App\Models\wishList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\returnSelf;
+
 class WishListController extends Controller
 {
     /**
@@ -16,12 +18,7 @@ class WishListController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            // $wishList = $user->productsWishList()->select([ 'name', 'price'])->paginate(10);
-            // $wishList = $user->load(['productsWishList' => function($query){
-            //     $query->select([ 'name', 'price']);
-            // }]);
-            $wishList = $user->productsWishList()->paginate(8, ['name', 'price', 'imageUrl']);
-
+            $wishList = $user->productsWishList()->get();
             if ($wishList->count() > 0) {
                 // Trả về dữ liệu phân trang dưới dạng JSON
                 return response()->json(['wishList' => $wishList]);
@@ -46,7 +43,26 @@ class WishListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $productId = $request->product_id;
+            $wishlistItem = wishList::where('user_id', $user_id)
+                ->where('product_id', $productId)
+                ->first();
+
+            if (!$wishlistItem) {
+                $wishList = new WishList();
+                $wishList->user_id = $user_id;
+                $wishList->product_id = $request->product_id;
+                $wishList->save();
+                return response()->json(['message' => 'Đã thêm sản phẩm vào danh sách yêu thích']);
+                
+            } else {
+                return response()->json(['message' => 'Sản phẩm đã có trong danh sách yêu thích']);
+            }
+        } else {
+            return response()->json(['message' => 'Bạn chưa đăng nhập'], 401); // Unauthorized
+        }
     }
 
     /**

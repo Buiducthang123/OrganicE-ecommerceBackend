@@ -187,8 +187,7 @@ class ProductController extends Controller
     function quickView($id)
     {
         $product = Product::with(['thumbnails', 'category'])
-            ->find($id)->only(['id','name', 'current_Price','average_rating', 'description', 'price','imageUrl', 'discount', 'thumbnails', 'category' ]); 
-
+            ->find($id)->only(['id','name','average_rating', 'description', 'price','imageUrl', 'discount', 'thumbnails', 'category' ]); 
 
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
@@ -238,7 +237,7 @@ class ProductController extends Controller
             ->where('category_id', $category_id)
             ->where('id', '!=', $product_id)
             ->limit(5)
-            ->select('id','name','imageUrl','current_Price', 'average_rating', 'description', 'price', 'discount', 'category_id')
+            ->select('id','name','imageUrl', 'average_rating', 'description', 'price', 'discount', 'category_id')
             ->get();
 
         return response()->json([

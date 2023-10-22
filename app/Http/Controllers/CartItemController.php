@@ -104,8 +104,27 @@ class CartItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CartItem $cartItem)
+    public function destroy( $product_id)
     {
         //
+        if (Auth::check()) {
+            $user = Auth::user();
+            $cart_id = $user->cart->id;
+            if ($cart_id) {
+                $cartItem = CartItem::where('cart_id', $cart_id)
+                    ->where('product_id', $product_id)
+                    ->first();
+                if ($cartItem) {
+                    $cartItem->delete();
+                    return response()->json(['message' => 'Sản phẩm đã được xóa khỏi giỏ hàng']);
+                } else {
+                    return response()->json(['message' => 'Sản phẩm không tồn tại trong giỏ hàng']);
+                }
+            } else {
+                return response()->json(['message' => 'Không tìm thấy giỏ hàng cho người dùng này']);
+            }
+        }
+        
+        return response()->json(['message' => 'Bạn chưa đăng nhập'], 401);
     }
 }
