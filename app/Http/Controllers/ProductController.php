@@ -180,7 +180,7 @@ class ProductController extends Controller
 
     function testFunc(Request $request, $id)
     {
-        return response()->json($request);
+        return response()->json($request->quantity);
     }
 
     //Product quick view
