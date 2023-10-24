@@ -93,33 +93,19 @@ class CartItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CartItem $cartItem)
+    public function update(Request $request, $product_id)
     {
+      
+       
         if (Auth::check()) {
-            $customMessages = [
-                "product_id.required" => "Product_id không được bỏ trống",
-                "quantity.required" => "Quantity không được bỏ trống"
-            ];
-
-            $validator = Validator::make($request->all(), [
-                "product_id" => "required",
-                "quantity" => "required"
-            ], $customMessages);
-
-            if ($validator->fails()) {
-                $errors = $validator->errors();
-                return response()->json(["errors" => $errors], 422);
-            }
-
             $user = Auth::user();  
             $cart = $user->cart;
-
             if (!$cart) {
                 return response()->json(["message" => "Không tìm thấy giỏ hàng cho người dùng này"], 404);
             }
 
             $existingCartItem = CartItem::where('cart_id', $cart->id)
-                ->where('product_id', $request->product_id)
+                ->where('product_id', $product_id)
                 ->first();
 
             if ($existingCartItem) {

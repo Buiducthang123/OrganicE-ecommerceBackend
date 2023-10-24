@@ -178,7 +178,7 @@ class ProductController extends Controller
         ], 200);
     }
 
-    function testFunc(Request $request)
+    function testFunc(Request $request, $id)
     {
         return response()->json($request);
     }
@@ -258,9 +258,10 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request,$id)
     {
         //
+        return response()->json([$request->all()], 200);
     }
 
     /**

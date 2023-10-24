@@ -39,7 +39,7 @@ Route::resource('/categories', CategoryController::class);
 //Products api-----------------------------------------------------------------------------------
 
 
-Route::resource('/product', ProductController::class)->names('products');
+Route::resource('/product', ProductController::class);
 Route::prefix('products')->group(function () {
     
     //Sản phẩm nổi bật (featuredProducts)
@@ -74,3 +74,4 @@ Route::prefix('carts')->middleware('auth:sanctum')->group(function () {
 
 //Danh sách sản phẩm yêu thích
 Route::resource('wish_list', WishListController::class)->middleware('auth:sanctum');
+Route::put('/ahahah/{id}', [ProductController::class,'testFunc'])->middleware('auth:sanctum');
