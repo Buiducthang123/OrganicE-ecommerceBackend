@@ -74,4 +74,4 @@ Route::prefix('carts')->middleware('auth:sanctum')->group(function () {
 
 //Danh sách sản phẩm yêu thích
 Route::resource('wish_list', WishListController::class)->middleware('auth:sanctum');
-Route::put('/ahahah/{id}', [ProductController::class,'testFunc'])->middleware('auth:sanctum');
+// Route::put('/ahahah/{id}', [ProductController::class,'testFunc'])->middleware('auth:sanctum');
