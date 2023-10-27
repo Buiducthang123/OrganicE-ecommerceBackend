@@ -33,8 +33,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'role_id'
     ];
 
+
+    protected $appends = ['permission'];
+
+   
     /**
      * The attributes that should be cast.
      *
@@ -52,6 +57,12 @@ class User extends Authenticatable
     function productswishList() {
         return $this->belongsToMany(Product::class,'wish_lists');
     }
+    function role(){
+        return $this->belongsToMany(Role::class);
+    }
 
-   
+    public function getPermissionAttribute()
+    {
+        return $this->role_id;
+    }
 }

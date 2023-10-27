@@ -27,5 +27,9 @@ class category extends Model
     {
         return 'slug'; // Sử dụng trường slug thay cho khóa chính mặc định (id) trong các tìm kiếm theo khóa ngoại
     }
+
+    function blogs() {
+        return $this->hasMany(Blog::class);
+    }
    
 }

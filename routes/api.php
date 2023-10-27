@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
@@ -74,4 +75,13 @@ Route::prefix('carts')->middleware('auth:sanctum')->group(function () {
 
 //Danh sách sản phẩm yêu thích
 Route::resource('wish_list', WishListController::class)->middleware('auth:sanctum');
-// Route::put('/ahahah/{id}', [ProductController::class,'testFunc'])->middleware('auth:sanctum');
+Route::put('/ahahah/{id}', [ProductController::class,'testFunc'])->middleware('auth:sanctum')->middleware('authMiddlware');
+
+
+//Route Blog
+Route::resource('/blog', BlogController::class,[
+    'except'=> ['index','show']
+])->middleware(['auth:sanctum','authMiddlware']);
+Route::get('/blog', [ProductController::class,'index']);
+Route::get('/blog/{id}', [ProductController::class,'show']);
+

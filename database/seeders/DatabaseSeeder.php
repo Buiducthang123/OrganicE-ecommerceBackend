@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Faker\Core\Blood;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,7 +28,9 @@ class DatabaseSeeder extends Seeder
             NewsSeeder::class,
             ReviewSeeder::class,
             CartSeeder::class,
-            WishListSeeder::class
+            WishListSeeder::class,
+            BlogSeeder::class,
+            RoleSeeder::class,
     ]);
     }
 }

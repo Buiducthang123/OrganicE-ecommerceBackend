@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class role extends Model
 {
     use HasFactory;
-    function category() {
-        return $this->belongsTo(category::class);
+    protected $guarded = ['permission'];
+
+    function users() {
+        return $this->hasMany(User::class);
     }
 }
