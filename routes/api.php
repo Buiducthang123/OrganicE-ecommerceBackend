@@ -82,6 +82,6 @@ Route::put('/ahahah/{id}', [ProductController::class,'testFunc'])->middleware('a
 Route::resource('/blog', BlogController::class,[
     'except'=> ['index','show']
 ])->middleware(['auth:sanctum','authMiddlware']);
-Route::get('/blog', [ProductController::class,'index']);
-Route::get('/blog/{id}', [ProductController::class,'show']);
+Route::get('/blog', [BlogController::class,'index']);
+Route::get('/blog/{id}', [BlogController::class,'show']);
 

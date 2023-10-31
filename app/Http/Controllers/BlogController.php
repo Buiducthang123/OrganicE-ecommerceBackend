@@ -78,11 +78,11 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show($blog_id)
     {
-        //
+        $blog = Blog::find($blog_id);
         if($blog){
-            return response()->json($blog);
+            return response()->json(['a'=>$blog]);
         }
         return response()->json(["message"=> "Blog không tồn tại"],404);
     }
