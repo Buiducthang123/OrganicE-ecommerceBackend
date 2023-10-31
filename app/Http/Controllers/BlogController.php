@@ -82,7 +82,7 @@ class BlogController extends Controller
     {
         $blog = Blog::find($blog_id);
         if($blog){
-            return response()->json(['a'=>$blog]);
+            return response()->json($blog);
         }
         return response()->json(["message"=> "Blog không tồn tại"],404);
     }
