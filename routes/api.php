@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WishListController;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 // use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -84,4 +85,4 @@ Route::resource('/blog', BlogController::class,[
 ])->middleware(['auth:sanctum','authMiddlware']);
 Route::get('/blog', [BlogController::class,'index']);
 Route::get('/blog/{id}', [BlogController::class,'show']);
-
+Route::resource('comment', Comment::class);

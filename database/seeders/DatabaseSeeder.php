@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             WishListSeeder::class,
             BlogSeeder::class,
             RoleSeeder::class,
+            CommentSeeder::class,
     ]);
     }
 }

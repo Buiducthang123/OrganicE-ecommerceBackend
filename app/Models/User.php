@@ -65,4 +65,8 @@ class User extends Authenticatable
     {
         return $this->role_id;
     }
+
+    public function comments() {
+        return $this->belongsToMany(Blog::class,"comments");
+    }
 }

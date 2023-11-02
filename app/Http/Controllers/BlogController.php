@@ -17,7 +17,7 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $blogs = Blog::orderBy("created_at", "desc")->paginate(10);
+        $blogs = Blog::with('category')->orderBy("created_at", "desc")->paginate(10);
         return response()->json($blogs);
     }
 
@@ -80,7 +80,7 @@ class BlogController extends Controller
      */
     public function show($blog_id)
     {
-        $blog = Blog::find($blog_id);
+        $blog = Blog::find($blog_id)->with('category')->get();
         if($blog){
             return response()->json($blog);
         }
