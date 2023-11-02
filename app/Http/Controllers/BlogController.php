@@ -80,7 +80,7 @@ class BlogController extends Controller
      */
     public function show($blog_id)
     {
-        $blog = Blog::find($blog_id)->with('category')->get();
+        $blog = Blog::with('category')->find($blog_id);
         if($blog){
             return response()->json($blog);
         }
