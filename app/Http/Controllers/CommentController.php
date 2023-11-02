@@ -86,6 +86,11 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+       $bool =  $comment->delete();
+        if($bool)
+        {
+            return response()->json(["message"=> "Xóa thành công"],200);
+        }
+        return response()->json(["message"=> "lỗi"],500);
     }
 }
