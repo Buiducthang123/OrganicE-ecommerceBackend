@@ -13,6 +13,6 @@ class Blog extends Model
     }
     
     public function comments() {
-        return $this->belongsToMany(User::class,"comments");
+        return $this->belongsToMany(User::class,"comments")->withPivot('content');
     }
 }
