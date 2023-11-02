@@ -139,4 +139,13 @@ class BlogController extends Controller
         return response()->json(["message"=> "Xóa thành công:>"],200);
 
     }
+    //Hiển thị cmt trong blog
+    public function showComments($blog_id){
+
+        $comments = Blog::find($blog_id)->comments()->orderBy('created_at', 'desc')->get();
+        if($comments){
+            return response()->json($comments);
+        }
+        return response()->json(['message'=> 'Chưa có cmt nào'],404);
+    }
 }

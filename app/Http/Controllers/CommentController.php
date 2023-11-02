@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Comment;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 
 class CommentController extends Controller
 {
@@ -13,8 +18,7 @@ class CommentController extends Controller
     public function index()
     {
         //
-        $comments = Comment::latest()->paginate(10);
-        return response()->json($comments);
+
     }
 
     /**
@@ -31,6 +35,26 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         //
+        $user_id = auth()->user()->id;
+        $blog_ids = Blog::pluck('id')->toArray();
+        $validator = Validator::make($request->all(), [
+                'blog_id' => [
+                'required',
+                Rule::in($blog_ids),
+            ],
+            'content' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json(["errors" => $errors], 422);
+        }
+        $comment = new Comment();
+        $comment->user_id = $user_id;
+        $comment->content = $request->content;
+        $comment->blog_id = $request->blog_id;
+        $comment->save();
+        return response()->json(["message" => "Thành công"], 200);
     }
 
     /**

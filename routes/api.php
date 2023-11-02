@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WishListController;
@@ -85,4 +86,5 @@ Route::resource('/blog', BlogController::class,[
 ])->middleware(['auth:sanctum','authMiddlware']);
 Route::get('/blog', [BlogController::class,'index']);
 Route::get('/blog/{id}', [BlogController::class,'show']);
-Route::resource('comment', Comment::class);
+Route::get('/blog/comments/{blog_id}', [BlogController::class,'showComments']);
+Route::resource('/comment', CommentController::class)->middleware('auth:sanctum');
