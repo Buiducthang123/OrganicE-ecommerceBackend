@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Comment;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -70,7 +71,11 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        // //
+        // if(Auth::check()){
+
+        // }
+        // return ()
     }
 
     /**

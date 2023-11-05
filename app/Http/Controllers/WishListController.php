@@ -23,7 +23,7 @@ class WishListController extends Controller
                 // Trả về dữ liệu phân trang dưới dạng JSON
                 return response()->json(['wishList' => $wishList]);
             } else {
-                return response()->json(['message' => 'Danh sách yêu thích trống'], 404);
+                return response()->json(['message' => 'Danh sách yêu thích trống'], 200);
             }
         } else {
             return response()->json(['message' => 'Bạn chưa đăng nhập'], 401);
