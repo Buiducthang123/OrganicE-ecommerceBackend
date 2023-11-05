@@ -88,4 +88,3 @@ Route::get('/blog', [BlogController::class,'index']);
 Route::get('/blog/{id}', [BlogController::class,'show']);
 Route::get('/blog/comments/{blog_id}', [BlogController::class,'showComments']);
 Route::resource('/comment', CommentController::class)->middleware('auth:sanctum');
-// Route::delete('/comment',[CommentController::class,'destroy'])->middleware('auth:sanctum');

@@ -19,6 +19,7 @@ class CommentController extends Controller
     public function index()
     {
         //
+        return response()->json(["hiii"] );
 
     }
 
@@ -39,7 +40,7 @@ class CommentController extends Controller
         $user_id = auth()->user()->id;
         $blog_ids = Blog::pluck('id')->toArray();
         $validator = Validator::make($request->all(), [
-                'blog_id' => [
+            'blog_id' => [
                 'required',
                 Rule::in($blog_ids),
             ],
@@ -72,18 +73,25 @@ class CommentController extends Controller
     public function edit(Comment $comment)
     {
         // //
-        // if(Auth::check()){
-
-        // }
-        // return ()
+       
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+        
+        if (Auth::check()) {
+            $comment = Comment::find($id);  
+            
+            if (Auth::user()->id == $comment->user_id) {
+                $comment->content = $request->content;
+                $comment->save();
+                return response()->json(["message" => "Thành công"],200);
+            }
+            return response()->json(["message" => "Bạn không có quyền chỉnh sửa"], 401);
+        }
     }
 
     /**
@@ -91,11 +99,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-       $bool =  $comment->delete();
-        if($bool)
-        {
-            return response()->json(["message"=> "Xóa thành công"],200);
+        $bool =  $comment->delete();
+        if ($bool) {
+            return response()->json(["message" => "Xóa thành công"], 200);
         }
-        return response()->json(["message"=> "lỗi"],500);
+        return response()->json(["message" => "lỗi"], 500);
     }
 }
