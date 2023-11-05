@@ -143,9 +143,9 @@ class BlogController extends Controller
     public function showComments($blog_id){
         $comments = Blog::find($blog_id)
         ->comments()
-        ->select('comments.id', 'name', 'email', 'avata', 'comments.updated_at', 'content')
+        ->select('comments.id as comment_id','users.name', 'users.email', 'users.avata', 'comments.updated_at', 'content')
         ->orderBy('comments.updated_at', 'desc')
-        ->paginate(4);    
+        ->paginate(4,["comments.content"]);    
         if($comments){
             return response()->json($comments);
         }
