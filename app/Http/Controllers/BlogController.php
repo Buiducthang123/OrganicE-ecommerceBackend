@@ -142,7 +142,7 @@ class BlogController extends Controller
     //Hiển thị cmt trong blog
     public function showComments(Request $request, $blog_id){
         $limit = $request->limit?$request->limit:5;
-        $count = Blog::count();
+        $count = Blog::find($blog_id)::count();
         $comments = Blog::find($blog_id)
         ->comments()
         ->select('comments.id as comment_id','users.name', 'users.email', 'users.avata', 'comments.updated_at', 'content')
