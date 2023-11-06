@@ -140,12 +140,13 @@ class BlogController extends Controller
 
     }
     //Hiển thị cmt trong blog
-    public function showComments($blog_id){
+    public function showComments(Request $request, $blog_id){
+        $limit = $request->limit?$request->limit:5;
         $comments = Blog::find($blog_id)
         ->comments()
         ->select('comments.id as comment_id','users.name', 'users.email', 'users.avata', 'comments.updated_at', 'content')
         ->orderBy('comments.updated_at', 'desc')
-        ->paginate(4,["comments.content"]);    
+        ->limit($limit)->get();    
         if($comments){
             return response()->json($comments);
         }
