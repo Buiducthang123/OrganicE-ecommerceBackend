@@ -147,8 +147,8 @@ class BlogController extends Controller
         
         $comments = Blog::find($blog_id)
         ->comments()
-        ->select('comments.id as comment_id','users.name', 'users.email', 'users.avata', 'comments.updated_at', 'content')
-        ->orderBy('comments.updated_at', 'desc')
+        ->select('comments.id as comment_id','users.name', 'users.email', 'users.avata', 'comments.created_at', 'content')
+        ->orderBy('comments.created_at', 'desc')
         ->limit($limit)->get();    
         if($comments){
             return response()->json(["comment"=>$comments,"count"=>$count]);
