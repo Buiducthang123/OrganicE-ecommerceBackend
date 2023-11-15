@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             RoleSeeder::class,
             CommentSeeder::class,
+            OrderDetailSeeder::class,
     ]);
     }
 }

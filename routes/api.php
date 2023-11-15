@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WishListController;
@@ -88,3 +89,7 @@ Route::get('/blog', [BlogController::class,'index']);
 Route::get('/blog/{id}', [BlogController::class,'show']);
 Route::get('/blog/comments/{blog_id}', [BlogController::class,'showComments']);
 Route::resource('/comment', CommentController::class)->middleware('auth:sanctum');
+
+
+//hóa đơn
+Route::resource('/order_detail', OrderDetailController::class)->middleware(['auth:sanctum']);

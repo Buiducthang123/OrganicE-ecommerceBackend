@@ -70,4 +70,9 @@ class User extends Authenticatable
     public function comments() {
         return $this->belongsToMany(Blog::class,"comments");
     }
+
+    public function order_detail() {
+        return $this->hasMany(OrderDetail::class);
+    }
+
 }
