@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -45,8 +46,20 @@ class OrderDetailController extends Controller
 
                 $formattedOrders[] = $formattedOrder;
             }
-
-            return response()->json($formattedOrders);
+            $perPage = 5;
+            // Tổng số mục (đơn hàng) trong mảng $formattedOrders
+            $total = count($formattedOrders);
+            $page = request()->get('page', 1);
+            $slicedData = array_slice($formattedOrders, ($page - 1) * $perPage, $perPage);
+            $paginator = new LengthAwarePaginator(
+                $slicedData, // Dữ liệu cho trang hiện tại
+                $total,      // Tổng số mục (đơn hàng) trong mảng
+                $perPage,    // Số lượng mục trên mỗi trang
+                $page,       // Trang hiện tại
+                ['path' => request()->url()]
+            );
+            $paginatorArray = $paginator->toArray();
+            return response()->json($paginatorArray);
         }
 
         return response()->json(["error" => "User not logged in"], 401);
@@ -107,7 +120,7 @@ class OrderDetailController extends Controller
         $user = Auth::user();
 
         if ($user) {
-            
+
             if (!$orderDetail || $orderDetail->user_id !== $user->id) {
                 // If order not found or doesn't belong to the authenticated user
                 return response()->json(["message" => "Hóa đơn không tồn tại hoặc không thuộc về bạn"], 404);
