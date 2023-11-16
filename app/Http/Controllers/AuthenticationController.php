@@ -129,9 +129,7 @@ class AuthenticationController extends Controller
     {
         $user = Auth::user();
         if ($user) {
-            return response()->json([
-                "user" => $user
-            ], 200);
+            return response()->json($user, 200);
         } else {
             return response()->json([
                 "message" => "Unauthorized"
