@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('address_shipping'); // địa chỉ giao hàng 
             $table->string('payment_method');
             $table->text('note')->nullable();
-            $table->boolean("approval_status")->default(false);
+            $table->enum("approval_status",[0,1,2])->default(0);
             $table->timestamps();
         });
     }

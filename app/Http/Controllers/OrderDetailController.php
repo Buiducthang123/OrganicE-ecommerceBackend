@@ -37,6 +37,7 @@ class OrderDetailController extends Controller
                     'total_price' => $value->total_price,
                     'address_shipping' => $value->address_shipping,
                     'payment_method' => $value->payment_method,
+                    "approval_status"=>$value->approval_status,
                     'note' => $value->note,
                     'created_at' => $value->created_at,
                     'updated_at' => $value->updated_at,
