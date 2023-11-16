@@ -91,7 +91,7 @@ class OrderDetailController extends Controller
             $order->note = $request->note;
             $order->save();
 
-            return response()->json(['message' => 'Order created successfully'], 201); // 201 Created
+            return response()->json(['message' => 'Order created successfully'], 200);
         }
 
         return response()->json(['error' => 'User not logged in'], 401); // 401 Unauthorized
