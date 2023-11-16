@@ -25,12 +25,14 @@ class OrderDetailSeeder extends Seeder
                     [
                         'id' => $faker->numberBetween(1, 5),
                         "name"=> $faker->name,
+                        "image"=> $faker->imageUrl,
                         'quantity' => $faker->numberBetween(1, 5),
                         'price' => $faker->randomFloat(2, 10, 100),
                     ],
                     [
                         'id' => $faker->numberBetween(1, 5),
                         'name'=> $faker->name,
+                        "image"=> $faker->imageUrl,
                         'quantity' => $faker->numberBetween(1, 5),
                         'price' => $faker->randomFloat(2, 10, 100),
                     ],
