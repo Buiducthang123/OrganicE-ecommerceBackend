@@ -46,7 +46,7 @@ class OrderDetailController extends Controller
 
                 $formattedOrders[] = $formattedOrder;
             }
-            $perPage = 5;
+            $perPage = 10;
             // Tổng số mục (đơn hàng) trong mảng $formattedOrders
             $total = count($formattedOrders);
             $page = request()->get('page', 1);
