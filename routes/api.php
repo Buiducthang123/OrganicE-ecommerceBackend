@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\BillingAddressController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -89,7 +91,14 @@ Route::get('/blog', [BlogController::class,'index']);
 Route::get('/blog/{id}', [BlogController::class,'show']);
 Route::get('/blog/comments/{blog_id}', [BlogController::class,'showComments']);
 Route::resource('/comment', CommentController::class)->middleware('auth:sanctum');
-
-
 //hóa đơn
 Route::resource('/order_detail', OrderDetailController::class)->middleware(['auth:sanctum']);
+//User API
+Route::resource('/user', UserController::class)->except('update')->middleware(['auth:sanctum']);
+Route::put("/user/update",[UserController::class,"update"])->middleware(['auth:sanctum']);
+
+//BillingAddress
+// Route::resource('/billingAddress', BillingAddressController::class)->middleware(['auth:sanctum']);
+Route::put("/billing_address/update",[BillingAddressController::class,"update"])->middleware(['auth:sanctum']);
+//Change Password
+Route::put('/user/change_password',[UserController::class,'changePassword'])->middleware(['auth:sanctum']);

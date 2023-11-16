@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             CommentSeeder::class,
             OrderDetailSeeder::class,
+            BillingAddressSeeder::class
     ]);
     }
 }

@@ -34,7 +34,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'role_id',
-        'phone_number'
     ];
 
 
@@ -74,5 +73,11 @@ class User extends Authenticatable
     public function order_detail() {
         return $this->hasMany(OrderDetail::class);
     }
+    public function biling_address() {
+        return $this->hasOne(BillingAddress::class);
+    }
 
+    protected function getPassword(){
+        return $this->password;
+    }
 }
