@@ -65,57 +65,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # OrganicE-ecommerceBackend
-<h1>Học hành là chuyện cả đời. T đi chơi game mai fix </h1>
+<h1> Các mô tả chức năng đang được chỉnh sửa lại và cập nhật vào ngày mai </h1>
 <img src="https://thecaninebuddy.com/wp-content/uploads/2021/08/crying-cat-meme-2048x1152.jpg?ezimgfmt=ng%3Awebp%2Fngcb1%2Frs%3Adevice%2Frscb1-1">
-
-<b>Các api:<b/>
-    <ul>
-    Route:Get:
-        <li>api/categories: API trả về danh sách categories</li>
-        <li>api/categories/{category}: Trả về tất cả sản phẩm thuộc category</li>
-        <li>api/product/featuredProducts: Trả về featureProducts</li>
-        <li>api/getCurrentUser: Trả về User đang đăng nhập</li>
-        <li>api/product/hotDeals: Trả về sản phẩm hotDeals ( 3 sản phẩm )</li>
-        <li>api/product/: Trả về tất cả các sản phẩm</li>
-        <li>api/product/{product}: Xem chi tiết sản phẩm ( bao gồm cả thumbnails của sản phẩm)</li>
-        <li>api/reviews: Trả về 4 đánh giá của người dùng về trang web</li> 
-        <li>api/product/filterProducts" lọc sản phẩm
-            <ul>
-                Mô tả 
-                <li>
-                    <img src="https://scontent.fhan5-8.fna.fbcdn.net/v/t1.15752-9/387583222_1068103284110246_8996741958876999568_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=5Xdfx3G5naMAX8164wS&_nc_ht=scontent.fhan5-8.fna&_nc_e2o=s&oh=03_AdS9YnCHzXui9D5mM-RCXZQtsQPMe_jFk96plQT-ffH6gA&oe=654B7B5A">
-                </li>
-                <li>
-                    <img src="https://scontent.fhan5-9.fna.fbcdn.net/v/t1.15752-9/387525071_700266018240312_7259775648934234955_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=rCSb91y3WtgAX_r2pWL&_nc_ht=scontent.fhan5-9.fna&_nc_e2o=s&oh=03_AdRNtQd1thMG9EMeZqRe7UDK2EWnmtnvUtJSD7aalB3EEA&oe=654B6A25">
-                </li>
-                <li>
-                    <p>Nhận vào các trường như ảnh :)) có thể để trống </p>
-                    <p>Trả về product đã phân trang ( mặc định 10sp 1 trang)</p>
-                </li>
-            </ul>
-        </li>
-        <li>api/product/searchProduct: Tìm kiếm sản phẩm theo tên
-            <ul>
-                <li><img src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.15752-9/387488755_323564463594714_2478060476593310063_n.png?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=W7CbylSAqSgAX9QX87l&_nc_ht=scontent.fhan5-2.fna&_nc_e2o=s&oh=03_AdTycbUnz66JrXPYdJZOHxr1Ttvy_FNKqa0APL0rvkizTg&oe=654B7A42"></li>
-            </ul>
-        </li>
-        <li>api/product/quickView: Hiển thị thông tin nhanh sản phẩm</li>
-        <li>api/cart: Hiển thị tất cả sản phẩm trong giỏ hàng</li>
-        <li>api/cart/quick_infor: Hiển thị thông tin nhanh sản phẩm trong giỏ hàng</li>
-        <li>/api/wish_list: Hiển thị sản phẩm yêu thích</li>
-    </ul>
-<ul>
-    Route: Post:
-    <li>api/login: API đăng nhập</li>
-    <li>api/register: API đăng ký</li>    
-    <li>
-        api/cartItem: Thêm sản phẩm vào giỏ hàng
-            <img src = "https://scontent.fhan5-6.fna.fbcdn.net/v/t1.15752-9/387324512_696506692538849_4966918350848311080_n.png?_nc_cat=105&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=Xpv1axbaGHAAX-noJ_3&_nc_ht=scontent.fhan5-6.fna&_nc_e2o=s&oh=03_AdTcYOEg7O_GIl9Soz0dkBakzmWppI9TFUjKpfVSBHx5bQ&oe=654F47AF"/>
-    </li>
-</ul>
-<ul>
-    Route: delete:
-    <li>api/logout: API đăng xuất</li>
-    <li>api/wish_list/{product_id}: Xóa sản phẩm khỏi danh sách yêu thích</li>  
-</ul>
 
