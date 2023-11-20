@@ -18,7 +18,7 @@ class OrderDetailController extends Controller
         $user = Auth::user();
 
         if ($user) {
-            $orderDetails = $user->order_detail;
+            $orderDetails = $user->order_detail()->latest()->get();
 
             if ($orderDetails->isEmpty()) {
                 return response()->json(["message" => "Chưa có hóa đơn nào"]);
