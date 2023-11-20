@@ -107,7 +107,7 @@ class OrderDetailController extends Controller
             $order->address_shipping = $request->address_shipping;
             $order->payment_method = $request->payment_method;
             $order->email = $request->email;
-            $order->phone_number =  $request->phone_number;
+            $order->phone_number = $request->phone_number;
             $order->note = $request->note;
             $order->save();
 
