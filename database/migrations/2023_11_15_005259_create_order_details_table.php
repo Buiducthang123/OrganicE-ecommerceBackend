@@ -19,6 +19,7 @@ return new class extends Migration
             // $table->string('address_billing');
             $table->string('address_shipping'); // địa chỉ giao hàng 
             $table->string('payment_method');
+            $table->string('name');
             $table->string('email');
             $table->string('phone_number');
             $table->text('note')->nullable();

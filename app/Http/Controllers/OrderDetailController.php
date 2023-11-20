@@ -39,6 +39,7 @@ class OrderDetailController extends Controller
                     'address_shipping' => $value->address_shipping,
                     'payment_method' => $value->payment_method,
                     "approval_status" => $value->approval_status,
+                    "name"=>$value->name,
                     "phone_number"=>$value->phone_number,
                     "email"=>$value->email,
                     'note' => $value->note,
@@ -90,6 +91,7 @@ class OrderDetailController extends Controller
                 'payment_method' => 'required|string',
                 'phone_number'=>'required|size:10|string',
                 'email'=>"required|email",
+                'name'=>"required|string",
                 'note' => 'nullable|string',
             ]);
 
@@ -107,6 +109,7 @@ class OrderDetailController extends Controller
             $order->address_shipping = $request->address_shipping;
             $order->payment_method = $request->payment_method;
             $order->email = $request->email;
+            $order->name= $request->name;
             $order->phone_number = $request->phone_number;
             $order->note = $request->note;
             $order->save();
@@ -143,6 +146,7 @@ class OrderDetailController extends Controller
                 'payment_method' => $orderDetail->payment_method,
                 'approval_status' => $orderDetail->approval_status,
                 "phone_number"=>$orderDetail->phone_number,
+                "name"=>$orderDetail->name,
                 "email"=>$orderDetail->email,
                 'note' => $orderDetail->note,
                 'created_at' => $orderDetail->created_at,
