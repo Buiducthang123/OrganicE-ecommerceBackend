@@ -41,6 +41,8 @@ class OrderDetailSeeder extends Seeder
                 'total_price' => $faker->randomFloat(2, 50, 200),
                 'address_shipping' => $faker->address,
                 'payment_method' => $faker->creditCardType,
+                'phone_number'=>$faker->phoneNumber,
+                "email"=>$faker->email,
                 'note' => $faker->text,
                 'created_at' => now(),
                 'updated_at' => now(),
