@@ -8,4 +8,7 @@
 </p>
 
 ## OrganicE-ecommerceBackend
+## Project Overview
+<h1> Tổng quan dự án </h1>
+<p>OrganicE là một nền tảng thương mại điện tử bền vững tập trung vào việc cung cấp các sản phẩm hữu cơ và thân thiện với môi trường cho người tiêu dùng có ý thức về môi trường. Backend xử lý nhiều khía cạnh của hệ sinh thái thương mại điện tử, bao gồm xác thực người dùng, quản lý sản phẩm, xử lý đơn hàng và nhiều tính năng khác.</p>
 
