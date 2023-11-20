@@ -142,6 +142,8 @@ class OrderDetailController extends Controller
                 'address_shipping' => $orderDetail->address_shipping,
                 'payment_method' => $orderDetail->payment_method,
                 'approval_status' => $orderDetail->approval_status,
+                "phone_number"=>$orderDetail->phone_number,
+                "email"=>$orderDetail->email,
                 'note' => $orderDetail->note,
                 'created_at' => $orderDetail->created_at,
                 'updated_at' => $orderDetail->updated_at,
