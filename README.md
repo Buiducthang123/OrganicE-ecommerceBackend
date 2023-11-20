@@ -9,6 +9,27 @@
 
 ## OrganicE-ecommerceBackend
 ## Project Overview
-<h1> Tổng quan dự án </h1>
 <p>OrganicE là một nền tảng thương mại điện tử bền vững tập trung vào việc cung cấp các sản phẩm hữu cơ và thân thiện với môi trường cho người tiêu dùng có ý thức về môi trường. Backend xử lý nhiều khía cạnh của hệ sinh thái thương mại điện tử, bao gồm xác thực người dùng, quản lý sản phẩm, xử lý đơn hàng và nhiều tính năng khác.</p>
+## Getting Started
+<ul>Đảm bảo bạn đã cài đặt:
+    <li>PhP</li>
+    <li>Composer</li>
+    <li>Laravel</li>
+</ul>
+<h6>Cách cài đặt:</h6>
+# Sao chép dự án
+git clone https://github.com/Buiducthang123/OrganicE-ecommerceBackend.git
+
+# Di chuyển vào thư mục dự án
+cd backend
+
+# Cài đặt các phụ thuộc
+composer install
+
+# Tạo một bản sao của tệp .env
+cp .env.example .env
+
+# Tạo khóa ứng dụng
+php artisan key:generate
+
 
