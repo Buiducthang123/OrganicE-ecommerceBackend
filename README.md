@@ -8,3 +8,57 @@
 </p>
 
 ## OrganicE-ecommerceBackend
+<<<<<<< HEAD
+=======
+## Project Overview
+<p>OrganicE là một nền tảng thương mại điện tử bền vững tập trung vào việc cung cấp các sản phẩm hữu cơ và thân thiện với môi trường cho người tiêu dùng có ý thức về môi trường. Backend xử lý nhiều khía cạnh của hệ sinh thái thương mại điện tử, bao gồm xác thực người dùng, quản lý sản phẩm, xử lý đơn hàng và nhiều tính năng khác.</p>
+## Getting Started
+<p>Dự án trả về api hiển thị, để quản lý sản phẩm, danh mục, tài khoản người dùng và đơn đặt hàng. API Xác thực người dùng được xử lý bằng Laravel Sanctum. Người dùng có thể đăng ký, đăng nhập và thực hiện các hành động được xác thực.</p>
+<ul>Đảm bảo bạn đã cài đặt:
+    <li>PhP</li>
+    <li>Composer</li>
+    <li>Laravel</li>
+</ul>
+<h6>Cách cài đặt:</h6>
+
+    # Sao chép dự án
+    git clone https://github.com/Buiducthang123/OrganicE-ecommerceBackend.git
+    
+    #Di chuyển vào thư mục dự án
+    cd backend
+    
+    #Cài đặt các phụ thuộc
+    composer install
+    
+    #Tạo một bản sao của tệp .env
+    cp .env.example .env
+    
+    # Tạo khóa ứng dụng
+    php artisan key:generate
+<h6>Cách chạy:</h6>
+
+    #Chạy các di chuyển cơ sở dữ liệu
+    php artisan migrate
+
+    # Bắt đầu máy chủ phát triển
+    php artisan serve
+<h6>Khum chạy được là lỗi của bạn =))</h6>
+<h6>Để xem tất cả các route api cần chạy: </h6>
+
+    php artisan route:list
+##Các api và cách sử dụng
+<h6>Method: Get</h6>
+    <ul>
+        <li>api/getCurrentUser: Trả về thông tin user hiện tại đang đăng nhập</li>
+        <li>api/categories: Trả về ra danh sách các categories</li>
+        <li>api/categories/{category}: Trả về danh sách tất cả các sản phẩm trong category</li>
+        <li>api/product: Trả về danh sách tất cả product</li>
+        <li>api/products/featuredProducts: Trả về danh sách các sản phẩm nổi bật </li>
+        <li>api/products/bestSellerProducts: Trả về danh sách các sản phẩm bán chạy nhât </li>
+        <li>api/products/hotDeals: Trả về danh sách sản phẩm có ưu đãi lớn</li>
+    </ul>
+
+
+
+
+>>>>>>> ec455b7daffb5133f132cf4a3a2db7934918ed1a
