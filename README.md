@@ -17,19 +17,20 @@
     <li>Laravel</li>
 </ul>
 <h6>Cách cài đặt:</h6>
-# Sao chép dự án
-git clone https://github.com/Buiducthang123/OrganicE-ecommerceBackend.git
 
-# Di chuyển vào thư mục dự án
-cd backend
-
-# Cài đặt các phụ thuộc
-composer install
-
-# Tạo một bản sao của tệp .env
-cp .env.example .env
-
-# Tạo khóa ứng dụng
-php artisan key:generate
+    // Sao chép dự án
+    git clone https://github.com/Buiducthang123/OrganicE-ecommerceBackend.git
+    
+    //Di chuyển vào thư mục dự án
+    cd backend
+    
+    //Cài đặt các phụ thuộc
+    composer install
+    
+    //Tạo một bản sao của tệp .env
+    cp .env.example .env
+    
+    // Tạo khóa ứng dụng
+    php artisan key:generate
 
 
