@@ -88,7 +88,7 @@ class OrderDetailController extends Controller
                 'total_price' => 'required',
                 'address_shipping' => 'required|string',
                 'payment_method' => 'required|string',
-                'phone_number'=>'required|size:11|string',
+                'phone_number'=>'required|size:10|string',
                 'email'=>"required|email",
                 'note' => 'nullable|string',
             ]);
