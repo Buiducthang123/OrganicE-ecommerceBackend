@@ -56,6 +56,16 @@
         <li>api/products/featuredProducts: Trả về danh sách các sản phẩm nổi bật </li>
         <li>api/products/bestSellerProducts: Trả về danh sách các sản phẩm bán chạy nhât </li>
         <li>api/products/hotDeals: Trả về danh sách sản phẩm có ưu đãi lớn</li>
+        <li>api/products/searchProduct: Tìm kiếm sản phẩm</li>
+        <li>api/produts/quickView/{id}: Trả về thông tin nhanh của sản phẩm</li>
+        <li>api/reviews: Trả về đánh giá của khách hàng về trang web</li>
+        <li>api/cart: Trả về các sản phẩm trong giỏ hàng của user đang đăng nhập</li>
+        <li>api/carts/quickInfor: Trả về thông tin nhanh của giỏ hàng</li>
+        <li>api/wish_list: Trả về danh sách sản phẩm yêu thích của User yêu thích </li>
+        <li>api//blog: Trả về các bài blog</li>
+        <li>api//blog/{id}: Xem chi tiết blog</li>
+        <li>api/blog/comments/{blog_id}: Hiển thị các bình luận của 1 blog</li>
+        <li>api/order_detail: Trả về các đơn hàng đã đặt</li>
     </ul>
 
 
