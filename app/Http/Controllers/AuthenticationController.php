@@ -128,12 +128,13 @@ class AuthenticationController extends Controller
     function getCurrentUser()
     {
         $user = Auth::user();
-        $user->load(['billing_address' => function ($query) {
-            $query->select('FirstName', 'LastName', 'CompanyName', 'Address');
-        }]);
         
         
         if ($user) {
+            $user->load(['billing_address' => function ($query) {
+                $query->select('billing_addresses.user_id','billing_addresses.first_name', 'billing_addresses.last_name', 'billing_addresses.address');
+            }]);
+            
             return response()->json($user, 200);
         } else {
             return response()->json([
