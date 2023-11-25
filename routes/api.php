@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BillingAddressController;
 use App\Http\Controllers\BlogController;
@@ -47,7 +48,7 @@ Route::resource('/categories', CategoryController::class);
 
 Route::resource('/product', ProductController::class);
 Route::prefix('products')->group(function () {
-    
+
     //Sản phẩm nổi bật (featuredProducts)
     Route::get('/featuredProducts', [ProductController::class, 'featuredProducts']);
     //Sản phẩm bán chạy nhất (bestSellerProducts)
@@ -80,25 +81,43 @@ Route::prefix('carts')->middleware('auth:sanctum')->group(function () {
 
 //Danh sách sản phẩm yêu thích
 Route::resource('wish_list', WishListController::class)->middleware('auth:sanctum');
-Route::put('/ahahah/{id}', [ProductController::class,'testFunc'])->middleware('auth:sanctum')->middleware('authMiddlware');
+Route::put('/ahahah/{id}', [ProductController::class, 'testFunc'])->middleware('auth:sanctum')->middleware('authMiddlware');
 
 
 //Route Blog
-Route::resource('/blog', BlogController::class,[
-    'except'=> ['index','show']
-])->middleware(['auth:sanctum','authMiddlware']);
-Route::get('/blog', [BlogController::class,'index']);
-Route::get('/blog/{id}', [BlogController::class,'show']);
-Route::get('/blog/comments/{blog_id}', [BlogController::class,'showComments']);
+Route::resource('/blog', BlogController::class, [
+    'except' => ['index', 'show']
+])->middleware(['auth:sanctum', 'authMiddlware']);
+Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/blog/{id}', [BlogController::class, 'show']);
+Route::get('/blog/comments/{blog_id}', [BlogController::class, 'showComments']);
 Route::resource('/comment', CommentController::class)->middleware('auth:sanctum');
 //hóa đơn
 Route::resource('/order_detail', OrderDetailController::class)->middleware(['auth:sanctum']);
 //User API
 Route::resource('/user', UserController::class)->except('update')->middleware(['auth:sanctum']);
-Route::put("/user/update",[UserController::class,"update"])->middleware(['auth:sanctum']);
+Route::put("/user/update", [UserController::class, "update"])->middleware(['auth:sanctum']);
 
 //BillingAddress
 // Route::resource('/billingAddress', BillingAddressController::class)->middleware(['auth:sanctum']);
-Route::put("/billing_address/update",[BillingAddressController::class,"update"])->middleware(['auth:sanctum']);
+Route::put("/billing_address/update", [BillingAddressController::class, "update"])->middleware(['auth:sanctum']);
 //Change Password
-Route::put('/user/change_password',[UserController::class,'changePassword'])->middleware(['auth:sanctum']);
+Route::put('/user/change_password', [UserController::class, 'changePassword'])->middleware(['auth:sanctum']);
+
+//---------------------------------------------------------------------------------
+//ADMIN
+Route::prefix("admin")->middleware(['auth:sanctum',"authMiddlware"])->group(function () {
+
+    // Quản lý users
+    Route::prefix("user")->group(function () {
+        //Xem danh sách user
+        Route::get("/show_users", [ManageUserController::class, "show_users"]);
+        //Xem chi tiết user
+        Route::get("/show_user/{user_id}", [ManageUserController::class, "show_user"]);
+        //Thêm user
+        Route::post("/addUser", [ManageUserController::class, "add_user"]);
+        //Xóa user
+        Route::delete("/delete_user/{user_id}", [ManageUserController::class, "delete_user"]);
+    });
+
+});
