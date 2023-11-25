@@ -125,9 +125,14 @@ class AuthenticationController extends Controller
         }
     }
     //Lấy user đang đăng nhập
-    function getCurrentUser(Request $request)
+    function getCurrentUser()
     {
         $user = Auth::user();
+        $user->load(['billing_address' => function ($query) {
+            $query->select('FirstName', 'LastName', 'CompanyName', 'Address');
+        }]);
+        
+        
         if ($user) {
             return response()->json($user, 200);
         } else {
@@ -135,5 +140,6 @@ class AuthenticationController extends Controller
                 "message" => "Unauthorized"
             ], 401);
         }
+        
     }
 }

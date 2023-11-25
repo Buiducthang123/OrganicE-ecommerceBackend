@@ -20,11 +20,11 @@ class BillingAddressSeeder extends Seeder
         foreach ($user_ids as $value) {
             BillingAddress::create([
                 "user_id"=>$value,
-                "FirstName"=> $faker->firstName,
-                "LastName"=>$faker->lastName,
-                "Address"=>$faker->address,
-                "Email"=>$faker->email ,
-                "Phone"=>$faker->phoneNumber,
+                "first_name"=> $faker->firstName,
+                "last_name"=>$faker->lastName,
+                "address"=>$faker->address,
+                "email"=>$faker->email ,
+                "phone"=>$faker->phoneNumber,
             ]);
         }
     }

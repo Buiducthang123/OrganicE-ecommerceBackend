@@ -74,7 +74,7 @@ class User extends Authenticatable
     public function order_detail() {
         return $this->hasMany(OrderDetail::class);
     }
-    public function biling_address() {
+    public function billing_address() {
         return $this->hasOne(BillingAddress::class);
     }
 
