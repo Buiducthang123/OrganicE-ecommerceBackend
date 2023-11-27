@@ -107,7 +107,6 @@ Route::put('/user/change_password', [UserController::class, 'changePassword'])->
 //---------------------------------------------------------------------------------
 //ADMIN
 Route::prefix("admin")->middleware(['auth:sanctum',"authMiddlware"])->group(function () {
-
     // Quản lý users
     Route::prefix("user")->group(function () {
         //Xem danh sách user

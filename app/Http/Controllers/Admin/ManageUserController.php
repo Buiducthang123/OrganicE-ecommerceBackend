@@ -49,7 +49,7 @@ class ManageUserController extends Controller
     }
 
     function show_users() {
-        $users =  User::all();
+        $users =  User::paginate(10,["id","name","phone_number","avata","role_id"]);
         if($users){
             return response()->json($users);
         }
@@ -58,6 +58,9 @@ class ManageUserController extends Controller
     function show_user($user_id) {
         $user = User::find($user_id);
         if($user){
+            $user->load(['billing_address' => function ($query) {
+                $query->select('billing_addresses.user_id','billing_addresses.first_name', 'billing_addresses.last_name', 'billing_addresses.address');
+            }]);
             return response()->json($user);
         }
         return response()->json(['Message'=>'Không tồn tại người dùng này']);
