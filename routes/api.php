@@ -119,6 +119,8 @@ Route::prefix("admin")->middleware(['auth:sanctum',"authMiddlware"])->group(func
         Route::delete("/delete_user/{user_id}", [ManageUserController::class, "delete_user"]);
         //ban user
         Route::put("/ban_user",[ManageUserController::class, "ban_user"]);
+        //grant_permissions
+        Route::put('/grant_permissions',[ManageUserController::class, "grant_permissions"]);
     });
 
 });

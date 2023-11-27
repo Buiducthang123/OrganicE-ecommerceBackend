@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\ElseIf_;
 
@@ -93,6 +94,27 @@ class ManageUserController extends Controller
                 return response()->json(['message' => "Thằng  $user->name này hết bị cấm"]);
             }
             return response()->json(['message' => "Không ban được thằng Admin :)))"]);
+        }
+
+        return response()->json(['Message' => 'Không tồn tại người dùng này']);
+    }
+    function grant_permissions(Request $request)
+    {
+        $user = User::find($request->user_id);
+        if ($user) {
+            // return response()->json($user->id == $request->user_id && $user->permission != 2);
+            if ($user->permission == 2) {
+                if (Auth::id() == $request->user_id) {
+                    return response()->json(['message' => "Mày không có quyền hủy chính mình "]);
+                }
+                $user->role_id = 1;
+                $user->save();
+                return response()->json(['message' => "Thằng $user->name này không còn là Admin"]);
+            }
+
+            $user->role_id = 2;
+            $user->save();
+            return response()->json(['message' => "Thằng $user->name này đã thành Admin"]);
         }
 
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
