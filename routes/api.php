@@ -117,6 +117,8 @@ Route::prefix("admin")->middleware(['auth:sanctum',"authMiddlware"])->group(func
         Route::post("/addUser", [ManageUserController::class, "add_user"]);
         //Xóa user
         Route::delete("/delete_user/{user_id}", [ManageUserController::class, "delete_user"]);
+        //ban user
+        Route::put("/ban_user",[ManageUserController::class, "ban_user"]);
     });
 
 });
