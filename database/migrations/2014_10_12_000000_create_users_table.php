@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('avata')->default('https://bloganchoi.com/wp-content/uploads/2022/02/avatar-trang-y-nghia.jpeg');
             $table->unsignedInteger('role_id')->default(1);
+            $table->boolean("status")->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -19,6 +19,6 @@ class AuthMiddleware
         if (Auth::check() && Auth::user()->permission == 2) {
             return $next($request);
         }
-        return response()->json(["message"=>"Bạn không có quyền truy cập",Auth::user()],401);
+        return response()->json(["message"=>"Bạn không có quyền truy cập"],401);
     }
 }

@@ -49,7 +49,7 @@ class ManageUserController extends Controller
     }
 
     function show_users() {
-        $users =  User::paginate(10,["id","name","phone_number","avata","role_id"]);
+        $users =  User::paginate(10,["id","name","phone_number","avata","role_id","status"]);
         if($users){
             return response()->json($users);
         }
