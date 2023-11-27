@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('billing_addresses', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-          
             $table->string('name');
             $table->string('company_name')->nullable();
             $table->string('address');

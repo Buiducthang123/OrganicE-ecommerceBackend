@@ -66,8 +66,10 @@ class BillingAddressController extends Controller
             if($validator->fails()){
                 return response()->json(['error' => $validator->errors()], 422);
             }
-            $billingAddress = $user->billing_address()->update($request->all());
-            return response()->json(['Update thành công'=> true],200);
+            $billingAddress = $user->billing_address()->firstOrNew();
+            $billingAddress->update($request->all());
+            // $user->billing_address()->update($request->all());
+            return response()->json(['Update thành công'],200);
         }
         return response()->json(['message'=> 'Chưa đăng nhập'],401);
     }
