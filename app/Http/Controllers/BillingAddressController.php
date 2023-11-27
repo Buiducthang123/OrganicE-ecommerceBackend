@@ -57,12 +57,11 @@ class BillingAddressController extends Controller
         $user = auth()->user();
         if($user){
             $validator = Validator::make($request->all(), [
-                "FirstName"=>"required|string",
-                "LastName"=>["required","string",],
-                "CompanyName"=>"string",
-                "Address"=>"required|string",
-                "Phone"=>["required","string",],
-                "Email"=>"required|email"
+                "name"=>"required|string",
+                "company_name"=>"string",
+                "address"=>"required|string",
+                "phone"=>["required","string",],
+                "email"=>"required|email"
             ]);
             if($validator->fails()){
                 return response()->json(['error' => $validator->errors()], 422);
