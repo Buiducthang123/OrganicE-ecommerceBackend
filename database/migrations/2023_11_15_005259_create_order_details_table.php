@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone_number');
             $table->text('note')->nullable();
-            $table->enum("approval_status",[0,1,2,3,4])->default(0);
+            $table->enum("approval_status",[0,1,2,3,4,5])->default(0);
             $table->timestamps();
         });
     }
