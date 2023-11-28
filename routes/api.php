@@ -81,13 +81,13 @@ Route::prefix('carts')->middleware('auth:sanctum')->group(function () {
 
 //Danh sách sản phẩm yêu thích
 Route::resource('wish_list', WishListController::class)->middleware('auth:sanctum');
-Route::put('/ahahah/{id}', [ProductController::class, 'testFunc'])->middleware('auth:sanctum')->middleware('authMiddlware');
+Route::put('/ahahah/{id}', [ProductController::class, 'testFunc'])->middleware('auth:sanctum')->middleware('roleMiddleware');
 
 
 //Route Blog
 Route::resource('/blog', BlogController::class, [
     'except' => ['index', 'show']
-])->middleware(['auth:sanctum', 'authMiddlware']);
+])->middleware(['auth:sanctum', 'roleMiddleware']);
 Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 Route::get('/blog/comments/{blog_id}', [BlogController::class, 'showComments']);
@@ -106,7 +106,7 @@ Route::put('/user/change_password', [UserController::class, 'changePassword'])->
 
 //---------------------------------------------------------------------------------
 //ADMIN
-Route::prefix("admin")->middleware(['auth:sanctum',"authMiddlware"])->group(function () {
+Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(function () {
     // Quản lý users
     Route::prefix("user")->group(function () {
         //Xem danh sách user
