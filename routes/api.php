@@ -42,7 +42,7 @@ Route::delete('/logout', [AuthenticationController::class, 'logout'])->middlewar
 //get currentUser api
 Route::get('/getCurrentUser', [AuthenticationController::class, 'getCurrentUser'])->middleware('auth:sanctum');
 //categories api---------------------------------------------------------------------------------
-Route::resource('/categories', CategoryController::class);
+Route::resource('/categories', CategoryController::class)->only(['index', 'show']);
 //Products api-----------------------------------------------------------------------------------
 
 
@@ -122,5 +122,11 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         //grant_permissions
         Route::put('/grant_permissions',[ManageUserController::class, "grant_permissions"]);
     });
-
+    //Quản lý categories
+    Route::prefix('category')->group(function() {
+        Route::post("/",[CategoryController::class,'store']);
+        Route::put('/{category}',[CategoryController::class,'update']);
+        Route::delete('/{category}',[CategoryController::class,'destroy']);
+    });
+    
 });

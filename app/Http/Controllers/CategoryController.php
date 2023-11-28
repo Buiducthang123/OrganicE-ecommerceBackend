@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-use function PHPUnit\Framework\isEmpty;
 
 class CategoryController extends Controller
 {
@@ -40,8 +41,41 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $rules = [
+            'name' => 'required |string|max:200',
+            // 'slug'=>'required |string|max:200|unique:categories.slug',
+            'image' => 'required |url'
+        ];
+        $messages = [
+            'name.required' => 'The name field is required.',
+            'name.string'   => 'The name must be a string.',
+            'name.max'      => 'The name may not be greater than 200 characters.',
+            // 'slug.required' => 'The slug field is required.',
+            // 'slug.string'   => 'The slug must be a string.',
+            // 'slug.max'      => 'The slug may not be greater than 200 characters.',
+            // 'slug.unique'   => 'The slug has already been taken.',
+            'image.required' => 'The image field is required.',
+            'image.url'     => 'The image must be a valid URL.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $category = new category;
+        $category->fill($request->all());
+        try {
+            // Try saving the category
+            if ($category->save()) {
+                return response()->json(['message' => 'Thêm mới category thành công']);
+            }
+        } catch (QueryException $e) {
+            // Handle SQL error and print the error message
+            $sqlError = $e->getMessage();
+            return response()->json(['Thêm mới không thành công errors'], 500);
+        }
+        $saveErrors = $category->getErrors()->all();
+        return response()->json(['Thêm mới không thành công errors'], 500);
     }
-
     /**
      * Display the specified resource.
      * //Hiển thị sản phẩm theo danh mục
@@ -50,8 +84,8 @@ class CategoryController extends Controller
     {
         //
         $category = Category::where('id', $slug)
-        ->orWhere('slug', $slug)
-        ->firstOrFail();
+            ->orWhere('slug', $slug)
+            ->firstOrFail();
         $products = $category->products;
         if ($products->isEmpty()) {
             return response()->json([

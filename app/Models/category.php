@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 class category extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name','image'];
     function products() {
         return $this->hasMany(Product::class);
     }
