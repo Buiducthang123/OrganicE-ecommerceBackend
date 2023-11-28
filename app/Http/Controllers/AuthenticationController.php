@@ -132,7 +132,7 @@ class AuthenticationController extends Controller
         
         if ($user) {
             $user->load(['billing_address' => function ($query) {
-                $query->select('billing_addresses.user_id','billing_addresses.name', "billing_addresses.phone","billing_addresses.email",'billing_addresses.address');
+                $query->select('billing_addresses.user_id','billing_addresses.name', "billing_addresses.phone",'company_name',"billing_addresses.email",'billing_addresses.address');
             }]);
             
             return response()->json($user, 200);
