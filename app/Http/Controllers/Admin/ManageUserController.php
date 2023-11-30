@@ -78,7 +78,7 @@ class ManageUserController extends Controller
                 $user->delete();
                 return response()->json(['message' => "User đã bị xóa"]);
             }
-            return response()->json(['Message' => 'Không xóa được chính mình']);
+            return response()->json(['Message' => 'Không xóa được chính mình'],400);
         }
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
     }
