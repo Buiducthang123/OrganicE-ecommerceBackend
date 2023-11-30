@@ -74,8 +74,11 @@ class ManageUserController extends Controller
     {
         $user = User::find($user_id);
         if ($user) {
-            $user->delete();
-            return response()->json(['message' => "User đã bị xóa"]);
+            if($user->id!=Auth::id()){
+                $user->delete();
+                return response()->json(['message' => "User đã bị xóa"]);
+            }
+            return response()->json(['Message' => 'Không xóa được chính mình']);
         }
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
     }
