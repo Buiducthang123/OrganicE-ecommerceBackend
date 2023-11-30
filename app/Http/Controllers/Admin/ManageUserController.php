@@ -123,7 +123,7 @@ class ManageUserController extends Controller
 
     function search_users(Request $request) {
 
-       
+        // return $request->name();
         $name = $request->name ? $request->name : '';
     
         $users = User::where('name', 'like', '%' . $name . '%')->paginate(10, ["id","email", "name", "phone_number", "avata", "role_id", "status"]);
