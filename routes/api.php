@@ -43,10 +43,9 @@ Route::delete('/logout', [AuthenticationController::class, 'logout'])->middlewar
 Route::get('/getCurrentUser', [AuthenticationController::class, 'getCurrentUser'])->middleware('auth:sanctum');
 //categories api---------------------------------------------------------------------------------
 Route::resource('/categories', CategoryController::class)->only(['index', 'show']);
-//Products api-----------------------------------------------------------------------------------
+//Products api---------------------------------------------------------------------------------
 
-
-Route::resource('/product', ProductController::class);
+Route::resource('/product', ProductController::class)->except(['update','store','edit','create']);
 Route::prefix('products')->group(function () {
 
     //Sản phẩm nổi bật (featuredProducts)
@@ -127,6 +126,12 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         Route::post("/",[CategoryController::class,'store']);
         Route::put("/{id}",[CategoryController::class,'update']);
         Route::delete("/{id}",[CategoryController::class,'destroy']);
+    });
+
+    Route::prefix('product')->group(function () {
+       Route::post("/",[ProductController::class,'store']); 
+       Route::put("/{id}",[ProductController::class,'update']); 
+       Route::delete("/{id}",[ProductController::class,'destroy']); 
     });
     
 });

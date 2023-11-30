@@ -10,7 +10,18 @@ class Product extends Model
 {
     use HasFactory;
     protected $appends = ['current_price'];
-
+    protected $fillable = [
+        'name',
+        'category_id',
+        'type',
+        'imageUrl',
+        'quantity',
+        'average_rating',
+        'discount',
+        'weight',
+        'description',
+        'price',
+    ];
     public function getCurrentPriceAttribute() {
         return $this->price * (1 - $this->discount / 100);
     }

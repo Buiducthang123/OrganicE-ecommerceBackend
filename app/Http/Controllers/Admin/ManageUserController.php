@@ -51,7 +51,7 @@ class ManageUserController extends Controller
 
     function show_users()
     {
-        $users =  User::paginate(10, ["id","email", "name", "phone_number", "avata", "role_id", "status"]);
+        $users =  User::latest()->paginate(10, ["id","email", "name", "phone_number", "avata", "role_id", "status"]);
         if ($users) {
             return response()->json($users);
         }

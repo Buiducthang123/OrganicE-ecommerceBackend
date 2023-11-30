@@ -8,6 +8,8 @@ use Hamcrest\Type\IsObject;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -134,14 +136,14 @@ class ProductController extends Controller
                     'category_id',
                     DB::raw('price * (1 - discount / 100) as current_price')
                 );
-            }                 
+            }
 
             if ($rating !== null) {
                 $query->where('average_rating', $rating);
             }
 
             if (!empty($price) && count($price) === 2) {
-                
+
                 $query->whereBetween(DB::raw('price * (1 - discount / 100)'), $price);
             }
 
@@ -149,7 +151,7 @@ class ProductController extends Controller
             $perPage = $request->input('per_page', 9);
             $page = $request->input('page', 1);
 
-            $products = $query->with(['thumbnails', 'category'=> function ($categoryQuery) {
+            $products = $query->with(['thumbnails', 'category' => function ($categoryQuery) {
                 $categoryQuery->select('name'); // Chọn các cột của danh mục
             }])
                 ->paginate($perPage, ['*'], 'page', $page);
@@ -187,7 +189,7 @@ class ProductController extends Controller
     function quickView($id)
     {
         $product = Product::with(['thumbnails', 'category'])
-            ->find($id)->only(['id','name','average_rating', 'description', 'price','imageUrl', 'discount', 'thumbnails', 'category' ]); 
+            ->find($id)->only(['id', 'name', 'average_rating', 'description', 'price', 'imageUrl', 'discount', 'thumbnails', 'category']);
 
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
@@ -217,14 +219,78 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+
+        $categories_id = category::pluck('id');
+        $rules = [
+            'name' => 'required|string|max:200',
+            'category_id' => [
+                'required',
+                Rule::in($categories_id),
+            ],
+            'imageUrl' => 'required|url',
+            'quantity' => 'required|numeric',
+            'average_rating' => [
+                'required',
+                Rule::in([1, 2, 3, 4, 5]),
+            ],
+            'discount' => [
+                'nullable',
+                Rule::in(range(1, 100)),
+            ],
+            'type' => 'required|string',
+            'weight' => 'required|numeric',
+            'description' => 'required|string',
+            'price' => 'required|numeric'
+        ];
+        $messages = [
+            'name.required' => 'The name field is required.',
+            'name.string' => 'The name must be a string.',
+            'name.max' => 'The name must not exceed :max characters.',
+            'category_id.required' => 'The category field is required.',
+            'category_id.in' => 'Invalid category selected.',
+            'imageUrl.required' => 'The image URL field is required.',
+            'imageUrl.url' => 'Please enter a valid URL for the image.',
+            'quantity.required' => 'The quantity field is required.',
+            'quantity.numeric' => 'The quantity must be a number.',
+            'average_rating.required' => 'The average rating field is required.',
+            'average_rating.in' => 'Invalid average rating selected.',
+            'discount.nullable' => 'The discount must be nullable.',
+            'discount.in' => 'Invalid discount value. It must be between 1 and 100.',
+            'weight.required' => 'The weight field is required.',
+            'weight.numeric' => 'The weight must be a number.',
+            'description.required' => 'The description field is required.',
+            'description.string' => 'The description must be a string.',
+            'type.required' => 'The type field is required.',
+            'type.string' => 'The type must be a string.',
+            'price.required' => 'The price field is required.',
+            'price.numeric' => 'The price must be a number.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json(['message' => $errors], 422);
+        }
+
+        try {
+            $product = new Product;
+            $product->fill($request->all());
+            $product->save();
+
+        } catch (\Throwable $th) {
+            return response()->json(["message"=>'thêm sản phẩm thất bại'],500);
+        }
+        return response()->json(["message"=>'thêm sản phẩm thành công']);
+
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show( $product_id )
+    public function show($product_id)
     {
-        
+
         $product = Product::with('thumbnails')->find($product_id);
 
         if (!$product) {
@@ -237,7 +303,7 @@ class ProductController extends Controller
             ->where('category_id', $category_id)
             ->where('id', '!=', $product_id)
             ->limit(5)
-            ->select('id','name','imageUrl', 'average_rating', 'description', 'price', 'discount', 'category_id')
+            ->select('id', 'name', 'imageUrl', 'average_rating', 'description', 'price', 'discount', 'category_id')
             ->get();
 
         return response()->json([
@@ -258,7 +324,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         //
         return response()->json([$request->all()], 200);
