@@ -120,12 +120,15 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         Route::put("/ban_user",[ManageUserController::class, "ban_user"]);
         //grant_permissions
         Route::put('/grant_permissions',[ManageUserController::class, "grant_permissions"]);
+        //tìm kiếm users
+        Route::get("/search_users",[ManageUserController::class, "search_users"]);
     });
     //Quản lý categories
     Route::prefix('category')->group(function() {
         Route::post("/",[CategoryController::class,'store']);
         Route::put("/{id}",[CategoryController::class,'update']);
         Route::delete("/{id}",[CategoryController::class,'destroy']);
+       
     });
 
     Route::prefix('product')->group(function () {

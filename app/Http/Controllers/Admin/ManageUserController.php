@@ -55,6 +55,7 @@ class ManageUserController extends Controller
         if ($users) {
             return response()->json($users);
         }
+        return response()->json(["message"=>'Không có người dùng nào']);
     }
 
     function show_user($user_id)
@@ -118,5 +119,19 @@ class ManageUserController extends Controller
         }
 
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
+    }
+
+    function search_users(Request $request) {
+
+       
+        $name = $request->name ? $request->name : '';
+    
+        $users = User::where('name', 'like', '%' . $name . '%')->paginate(10, ["id","email", "name", "phone_number", "avata", "role_id", "status"]);
+
+        if ($users) {
+            return response()->json($users);
+        }
+        return response()->json(["message"=>'Không có người dùng nào']);
+
     }
 }
