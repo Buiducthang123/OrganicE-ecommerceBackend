@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\category;
 use App\Models\Product;
+use App\Models\Thumbnail;
+use Hamcrest\Arrays\IsArray;
 use Hamcrest\Type\IsObject;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -240,7 +242,8 @@ class ProductController extends Controller
             'type' => 'required|string',
             'weight' => 'required|numeric',
             'description' => 'required|string',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
+            'thumbnails'=>'required|array'
         ];
         $messages = [
             'name.required' => 'The name field is required.',
@@ -264,8 +267,11 @@ class ProductController extends Controller
             'type.string' => 'The type must be a string.',
             'price.required' => 'The price field is required.',
             'price.numeric' => 'The price must be a number.',
+            'thumbnails.required' => 'The thumbnails field is required.',
+            'thumbnails.array' => 'The thumbnails field must be an array.',
         ];
 
+       
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             $errors = $validator->errors();
@@ -273,12 +279,34 @@ class ProductController extends Controller
         }
 
         try {
+            // $product = new Product;
+            // $product->fill($request->all());
+            // $product->save();
+            // // return response()->json(['isArray' => ($request->thumbnails)]);
+
+            // // $product->thumbnails()->createMany($request->thumbnails->imageUrl);
+          
+            // $thumbnailsData = json_decode($request->thumbnails, true);
+
+            // foreach ($thumbnailsData as $thumbnailData) {
+            //     $product->thumbnails()->create([
+            //         'imageUrl' => $thumbnailData,
+            //     ]);
+            // }
             $product = new Product;
             $product->fill($request->all());
             $product->save();
 
+            $thumbnailsData = $request->thumbnails;
+            
+            foreach ($thumbnailsData as $thumbnailUrl) {
+                $product->thumbnails()->create([
+                    'imageUrl' => $thumbnailUrl,
+                ]);
+            }
+
         } catch (\Throwable $th) {
-            return response()->json(["message"=>'thêm sản phẩm thất bại'],500);
+            return response()->json(["errors" => $th->getMessage()], 500);
         }
         return response()->json(["message"=>'thêm sản phẩm thành công']);
 

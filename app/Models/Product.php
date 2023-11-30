@@ -21,6 +21,7 @@ class Product extends Model
         'weight',
         'description',
         'price',
+        
     ];
     public function getCurrentPriceAttribute() {
         return $this->price * (1 - $this->discount / 100);
