@@ -108,16 +108,33 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, category $category)
+    public function update(Request $request, $id)
     {
         //
+        $category = category::find($id);
+        
+        try {
+            $category->update($request->all());
+            return response()->json(["message"=>'Cập nhật thành công']);
+        } catch (\Throwable $th) {
+            return response()->json(['message'=>"Cập nhật không thành công"],500);
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy($id)
     {
         //
+        $category = category::find($id);
+        
+        try {
+            $category->delete();
+            return response()->json(["message"=>'Xóa thành công']);
+        } catch (\Throwable $th) {
+            return response()->json(['message'=>"Xóa không thành công"],500);
+        }
     }
 }

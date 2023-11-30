@@ -125,8 +125,8 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
     //Quản lý categories
     Route::prefix('category')->group(function() {
         Route::post("/",[CategoryController::class,'store']);
-        Route::put('/{category}',[CategoryController::class,'update']);
-        Route::delete('/{category}',[CategoryController::class,'destroy']);
+        Route::put("/{id}",[CategoryController::class,'update']);
+        Route::delete("/{id}",[CategoryController::class,'destroy']);
     });
     
 });
