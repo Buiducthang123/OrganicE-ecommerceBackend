@@ -94,7 +94,7 @@ class ManageUserController extends Controller
                 $user->save();
                 return response()->json(['message' => "Thằng  $user->name này hết bị cấm"]);
             }
-            return response()->json(['message' => "Không ban được thằng Admin :)))"]);
+            return response()->json(['message' => "Không ban được thằng Admin :)))"],400);
         }
 
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
@@ -106,7 +106,7 @@ class ManageUserController extends Controller
             // return response()->json($user->id == $request->user_id && $user->permission != 2);
             if ($user->permission == 2) {
                 if (Auth::id() == $request->user_id) {
-                    return response()->json(['message' => "Mày không có quyền hủy chính mình "]);
+                    return response()->json(['message' => "Mày không có quyền hủy chính mình "],400);
                 }
                 $user->role_id = 1;
                 $user->save();
