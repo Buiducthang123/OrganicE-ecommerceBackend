@@ -135,6 +135,7 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
        Route::post("/",[ProductController::class,'store']); 
        Route::put("/{id}",[ProductController::class,'update']); 
        Route::delete("/{id}",[ProductController::class,'destroy']); 
+       Route::get('/show_products',[ProductController::class,'admin_show_products']);
     });
     
 });

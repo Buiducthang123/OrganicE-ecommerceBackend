@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::latest()->paginate(10);
+        $products = Product::latest()->get();
         if ($products->isEmpty()) {
             return response()->json([
                 "message" => "Không có sản phẩm nào được tìm thấy.",
@@ -432,5 +432,17 @@ class ProductController extends Controller
     
         return response()->json(['message' => 'Xóa sản phẩm thành công']);
     
+    }
+
+    function admin_show_products() {
+        $products = Product::latest()->paginate(10);
+        if ($products->isEmpty()) {
+            return response()->json([
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ], 404);
+        }
+        return response()->json([
+            "products" => $products
+        ], 200);
     }
 }
