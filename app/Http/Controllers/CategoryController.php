@@ -16,7 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = category::all()->latest();
+        $categories = Category::latest()->get();
+
         if ($categories->isEmpty()) {
             return response()->json([
                 "message" => "Không có danh mục nào được tìm thấy.",
