@@ -125,10 +125,15 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
     });
     //Quản lý categories
     Route::prefix('category')->group(function() {
+        //thêm cate
         Route::post("/",[CategoryController::class,'store']);
+        //sửa cate
         Route::put("/{id}",[CategoryController::class,'update']);
-        // Route::get("/{id}",[CategoryController::class,'update']);
+        //xem chi tiết cate
         Route::get("details/{id}",[CategoryController::class,'edit']);
+        //xóa
+        Route::delete("/{id}",[CategoryController::class,'destroy']);
+        //tìm kiếm
         Route::get("/search_categories",[CategoryController::class,'searchCategories']);
     });
 
