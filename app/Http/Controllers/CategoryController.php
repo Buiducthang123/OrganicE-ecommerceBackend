@@ -110,7 +110,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'name' => 'required |string|max:200',
+            'image' => 'required |url'
+        ];
+        $messages = [
+            'name.required' => 'The name field is required.',
+            'name.string'   => 'The name must be a string.',
+            'name.max'      => 'The name may not be greater than 200 characters.',
+            'image.required' => 'The image field is required.',
+            'image.url'     => 'The image must be a valid URL.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
         $category = category::find($id);
         
         try {
