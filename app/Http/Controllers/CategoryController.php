@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = category::all();
+        $categories = category::all()->latest();
         if ($categories->isEmpty()) {
             return response()->json([
                 "message" => "Không có danh mục nào được tìm thấy.",
@@ -137,4 +137,17 @@ class CategoryController extends Controller
             return response()->json(['message'=>"Xóa không thành công"],500);
         }
     }
+    public function searchCategories(Request $request) {
+        $name = $request->name;
+        $categories = Category::where('name', 'like', '%' . $name . '%');
+        if ($categories->isEmpty()) {
+            return response()->json([
+                "message" => "Không có danh mục nào được tìm thấy.",
+            ], 404);
+        }
+        return response()->json([
+            "categories" => $categories
+        ], 200);
+    }
+    
 }

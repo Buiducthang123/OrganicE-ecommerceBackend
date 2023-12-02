@@ -128,7 +128,7 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         Route::post("/",[CategoryController::class,'store']);
         Route::put("/{id}",[CategoryController::class,'update']);
         Route::delete("/{id}",[CategoryController::class,'destroy']);
-       
+        Route::get("/search_categories",[CategoryController::class,'searchCategories']);
     });
 
     Route::prefix('product')->group(function () {
