@@ -51,11 +51,11 @@ class ManageUserController extends Controller
 
     function show_users()
     {
-        $users =  User::latest()->paginate(10, ["id","email", "name", "phone_number", "avata", "role_id", "status"]);
+        $users =  User::latest()->paginate(10, ["id", "email", "name", "phone_number", "avata", "role_id", "status"]);
         if ($users) {
             return response()->json($users);
         }
-        return response()->json(["message"=>'Không có người dùng nào']);
+        return response()->json(["message" => 'Không có người dùng nào']);
     }
 
     function show_user($user_id)
@@ -63,8 +63,32 @@ class ManageUserController extends Controller
         $user = User::find($user_id);
         if ($user) {
             $user->load(['billing_address' => function ($query) {
-                $query->select('billing_addresses.user_id','billing_addresses.name', "billing_addresses.phone",'company_name',"billing_addresses.email",'billing_addresses.address');
-            }]);
+                $query->select('billing_addresses.user_id', 'billing_addresses.name', "billing_addresses.phone", 'company_name', "billing_addresses.email", 'billing_addresses.address');
+            }, 'order_detail' => function ($query) {
+
+                $query->select('order_details.*');
+            },]);
+
+            // $decodedProducts = $user->order_detail()->decoded_products_order;
+
+            // Use simplePaginate for transforming the data
+            $user->order_detail->transform(function ($orderDetail) {
+                return [
+                'id' => $orderDetail->id,
+                'user_id' => $orderDetail->user_id,
+                'products_order' => $orderDetail->products_order,
+                'total_price' => $orderDetail->total_price,
+                'address_shipping' => $orderDetail->address_shipping,
+                'payment_method' => $orderDetail->payment_method,
+                'approval_status' => $orderDetail->approval_status,
+                "phone_number"=>$orderDetail->phone_number,
+                "name"=>$orderDetail->name,
+                "email"=>$orderDetail->email,
+                'note' => $orderDetail->note,
+                'created_at' => $orderDetail->created_at,
+                'updated_at' => $orderDetail->updated_at,
+                ];
+            });
             return response()->json($user);
         }
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
@@ -74,11 +98,11 @@ class ManageUserController extends Controller
     {
         $user = User::find($user_id);
         if ($user) {
-            if($user->id!=Auth::id()){
+            if ($user->id != Auth::id()) {
                 $user->delete();
                 return response()->json(['message' => "User đã bị xóa"]);
             }
-            return response()->json(['Message' => 'Không xóa được chính mình'],400);
+            return response()->json(['Message' => 'Không xóa được chính mình'], 400);
         }
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
     }
@@ -97,7 +121,7 @@ class ManageUserController extends Controller
                 $user->save();
                 return response()->json(['message' => "Thằng  $user->name này hết bị cấm"]);
             }
-            return response()->json(['message' => "Không ban được thằng Admin :)))"],400);
+            return response()->json(['message' => "Không ban được thằng Admin :)))"], 400);
         }
 
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
@@ -109,7 +133,7 @@ class ManageUserController extends Controller
             // return response()->json($user->id == $request->user_id && $user->permission != 2);
             if ($user->permission == 2) {
                 if (Auth::id() == $request->user_id) {
-                    return response()->json(['message' => "Mày không có quyền hủy chính mình "],400);
+                    return response()->json(['message' => "Mày không có quyền hủy chính mình "], 400);
                 }
                 $user->role_id = 1;
                 $user->save();
@@ -124,17 +148,17 @@ class ManageUserController extends Controller
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
     }
 
-    function search_users(Request $request) {
+    function search_users(Request $request)
+    {
 
         // return $request->name();
         $name = $request->name ? $request->name : '';
-    
-        $users = User::where('name', 'like', '%' . $name . '%')->paginate(10, ["id","email", "name", "phone_number", "avata", "role_id", "status"]);
+
+        $users = User::where('name', 'like', '%' . $name . '%')->paginate(10, ["id", "email", "name", "phone_number", "avata", "role_id", "status"]);
 
         if ($users) {
             return response()->json($users);
         }
-        return response()->json(["message"=>'Không có người dùng nào']);
-
+        return response()->json(["message" => 'Không có người dùng nào']);
     }
 }
