@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::paginate(10);
+        $products = Product::latest()->paginate(10);
         if ($products->isEmpty()) {
             return response()->json([
                 "message" => "Không có sản phẩm nào được tìm thấy.",
