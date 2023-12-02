@@ -76,7 +76,7 @@ class ManageUserController extends Controller
                 return [
                 'id' => $orderDetail->id,
                 'user_id' => $orderDetail->user_id,
-                'products_order' => $orderDetail->products_order,
+                'products_order' => $orderDetail->decoded_products_order,
                 'total_price' => $orderDetail->total_price,
                 'address_shipping' => $orderDetail->address_shipping,
                 'payment_method' => $orderDetail->payment_method,
