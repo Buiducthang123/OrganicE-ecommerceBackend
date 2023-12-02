@@ -101,9 +101,20 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit($id)
     {
         //
+        $category = category::find($id);
+        if ($category) {
+            return response()->json([
+                "category" => $category
+                
+            ], 200);
+        }
+
+        return response()->json([
+            "message" => "Không có danh mục nào được tìm thấy.",
+        ], 404);
     }
 
     /**
