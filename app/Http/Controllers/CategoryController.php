@@ -127,14 +127,13 @@ class CategoryController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
         $category = category::find($id);
-        
+
         try {
             $category->update($request->all());
-            return response()->json(["message"=>'Cập nhật thành công']);
+            return response()->json(["message" => 'Cập nhật thành công']);
         } catch (\Throwable $th) {
-            return response()->json(['message'=>"Cập nhật không thành công"],500);
+            return response()->json(['message' => "Cập nhật không thành công"], 500);
         }
-
     }
 
     /**
@@ -144,25 +143,28 @@ class CategoryController extends Controller
     {
         //
         $category = category::find($id);
-        
+
         try {
             $category->delete();
-            return response()->json(["message"=>'Xóa thành công']);
+            return response()->json(["message" => 'Xóa thành công']);
         } catch (\Throwable $th) {
-            return response()->json(['message'=>"Xóa không thành công"],500);
+            return response()->json(['message' => "Xóa không thành công"], 500);
         }
     }
-    public function searchCategories(Request $request) {
+    public function searchCategories(Request $request)
+    {
         $name = $request->name;
-        $categories = Category::where('name', 'like', '%' . $name . '%');
-        if (!$categories) {
+        $categories = Category::where('name', 'like', '%' . $name . '%')->get();
+
+        if (!$categories->isEmpty()) {
             return response()->json([
-                "message" => "Không có danh mục nào được tìm thấy.",
-            ], 404);
+                "categories" => $categories
+                
+            ], 200);
         }
+
         return response()->json([
-            "categories" => $categories
-        ], 200);
+            "message" => "Không có danh mục nào được tìm thấy.",
+        ], 404);
     }
-    
 }
