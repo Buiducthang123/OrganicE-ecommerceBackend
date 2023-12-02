@@ -155,7 +155,7 @@ class CategoryController extends Controller
     public function searchCategories(Request $request) {
         $name = $request->name;
         $categories = Category::where('name', 'like', '%' . $name . '%');
-        if ($categories->isEmpty()) {
+        if (!$categories) {
             return response()->json([
                 "message" => "Không có danh mục nào được tìm thấy.",
             ], 404);
