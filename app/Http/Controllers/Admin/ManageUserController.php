@@ -61,36 +61,46 @@ class ManageUserController extends Controller
     function show_user($user_id)
     {
         $user = User::find($user_id);
+    
         if ($user) {
-            $user->load(['billing_address' => function ($query) {
-                $query->select('billing_addresses.user_id', 'billing_addresses.name', "billing_addresses.phone", 'company_name', "billing_addresses.email", 'billing_addresses.address');
-            }, 'order_detail' => function ($query) {
-
-                $query->select('order_details.*');
-            },]);
-
-            // $decodedProducts = $user->order_detail()->decoded_products_order;
-
-            // Use simplePaginate for transforming the data
-            $user->order_detail->transform(function ($orderDetail) {
+            $user->load([
+                'billing_address' => function ($query) {
+                    $query->select('billing_addresses.user_id', 'billing_addresses.name', 'billing_addresses.phone', 'company_name', 'billing_addresses.email', 'billing_addresses.address');
+                },
+                
+            ]);
+    
+            $paginatedOrderDetails = $user->order_detail()->paginate(10);
+    
+            // Transform the paginated order details
+            $transformedOrderDetails = $paginatedOrderDetails->getCollection()->transform(function ($orderDetail) {
                 return [
-                'id' => $orderDetail->id,
-                'user_id' => $orderDetail->user_id,
-                'products_order' => $orderDetail->decoded_products_order,
-                'total_price' => $orderDetail->total_price,
-                'address_shipping' => $orderDetail->address_shipping,
-                'payment_method' => $orderDetail->payment_method,
-                'approval_status' => $orderDetail->approval_status,
-                "phone_number"=>$orderDetail->phone_number,
-                "name"=>$orderDetail->name,
-                "email"=>$orderDetail->email,
-                'note' => $orderDetail->note,
-                'created_at' => $orderDetail->created_at,
-                'updated_at' => $orderDetail->updated_at,
+                    'id' => $orderDetail->id,
+                    'user_id' => $orderDetail->user_id,
+                    'products_order' => $orderDetail->decoded_products_order,
+                    'total_price' => $orderDetail->total_price,
+                    'address_shipping' => $orderDetail->address_shipping,
+                    'payment_method' => $orderDetail->payment_method,
+                    'approval_status' => $orderDetail->approval_status,
+                    'phone_number' => $orderDetail->phone_number,
+                    'name' => $orderDetail->name,
+                    'email' => $orderDetail->email,
+                    'note' => $orderDetail->note,
+                    'created_at' => $orderDetail->created_at,
+                    'updated_at' => $orderDetail->updated_at,
                 ];
             });
-            return response()->json($user);
+    
+            // Replace the original order details with the transformed and paginated version
+            $paginatedOrderDetails->setCollection($transformedOrderDetails);
+    
+            // Return the user and paginated order details in the response
+            return response()->json([
+                'user' => $user,
+                'order_details' => $paginatedOrderDetails,
+            ]);
         }
+    
         return response()->json(['Message' => 'Không tồn tại người dùng này']);
     }
 
