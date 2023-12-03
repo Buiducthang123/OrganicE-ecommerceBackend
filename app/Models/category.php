@@ -11,6 +11,7 @@ class category extends Model
     use HasFactory;
 
     protected $fillable = ['name','image'];
+    protected $appends = ['gross_product'];
     function products() {
         return $this->hasMany(Product::class);
     }
@@ -32,6 +33,12 @@ class category extends Model
 
     function blogs() {
         return $this->hasMany(Blog::class);
+    }
+    public function getGrossProductAttribute()
+    {
+        
+        $quantity = $this->products()->count();
+        return $quantity ;
     }
    
 }

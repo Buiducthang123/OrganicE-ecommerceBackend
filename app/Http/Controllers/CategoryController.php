@@ -114,7 +114,7 @@ class CategoryController extends Controller
 
         return response()->json([
             "message" => "Không có danh mục nào được tìm thấy.",
-        ], 404);
+        ], 200);
     }
 
     /**
