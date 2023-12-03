@@ -166,16 +166,10 @@ class CategoryController extends Controller
     {
         $name = $request->name;
         $categories = Category::where('name', 'like', '%' . $name . '%')->get();
-
-        if (!$categories->isEmpty()) {
             return response()->json([
                 "categories" => $categories
                 
             ], 200);
-        }
-
-        return response()->json([
-            "message" => "Không có danh mục nào được tìm thấy.",
-        ], 404);
+        
     }
 }
