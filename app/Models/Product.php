@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
-    protected $appends = ['current_price'];
+    protected $appends = ['current_price','stock'];
     protected $fillable = [
         'name',
         'category_id',
@@ -25,6 +25,12 @@ class Product extends Model
     ];
     public function getCurrentPriceAttribute() {
         return $this->price * (1 - $this->discount / 100);
+    }
+    public function getStockAttribute() {
+        if($this->quantity==0){
+            return true;
+        }
+        return false;
     }
     protected static function boot()
     {
