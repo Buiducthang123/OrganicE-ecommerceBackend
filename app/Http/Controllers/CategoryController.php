@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $category = Category::where('id', $slug)
             ->orWhere('slug', $slug)
             ->firstOrFail();
-        $products = $category->products()->paginate(10);
+        $products = $category->products()->latest()->paginate(10);
         if ($products->isEmpty()) {
             return response()->json([
                 "message" => "Không có sản phẩm nào được tìm thấy.",
