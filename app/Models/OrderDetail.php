@@ -9,7 +9,7 @@ class OrderDetail extends Model
 {
     use HasFactory;
 
-    // protected $fillable = ["products_order","total_price","address_shipping","payment_method","note"] ;
+    protected $fillable = ['approval_status'] ;
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -20,4 +20,7 @@ class OrderDetail extends Model
         return json_decode($this->attributes['products_order'], true);
     }
     
+    public function getProductsOrderAttribute() {
+        return json_decode($this->attributes['products_order'], true);
+    }
 }

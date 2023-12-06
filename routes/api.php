@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ManageUserController;
+use App\Http\Controllers\Admin\OrderManagementController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BillingAddressController;
 use App\Http\Controllers\BlogController;
@@ -143,5 +144,17 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
        Route::delete("/{id}",[ProductController::class,'destroy']); 
        Route::get('/show_products',[ProductController::class,'admin_show_products']);
     });
-    
+    //QUản lý đơn hàng
+    Route::prefix('order')->group(function () {
+        //Xem đơn hàng chưa duyệt
+        Route::get('/',[OrderManagementController::class,'order_list']);
+        //Duyệt đơn hàng
+        Route::put('/approve_orders/{order_detail}',[OrderManagementController::class,'approve_orders']);
+        //Hủy đơn hàng
+        Route::put('/cancel_order/{order_detail}',[OrderManagementController::class,'cancel_order']);
+        //Hiển thị chi tiết order
+        Route::get('view_order_details/{order_detail}',[OrderManagementController::class,'view_order_details']);
+        //Lọc status 
+        Route::get('filter_status',[OrderManagementController::class,'filter_status']);
+    });
 });
