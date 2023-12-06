@@ -153,9 +153,7 @@ class ProductController extends Controller
             $perPage = $request->input('per_page', 9);
             $page = $request->input('page', 1);
 
-            $products = $query->with(['thumbnails', 'category' => function ($categoryQuery) {
-                $categoryQuery->select('name'); // Chọn các cột của danh mục
-            }])
+            $products = $query->with(['thumbnails', 'category'])
                 ->paginate($perPage, ['*'], 'page', $page);
 
             if ($products->isEmpty()) {

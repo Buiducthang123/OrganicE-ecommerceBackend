@@ -21,10 +21,10 @@ return new class extends Migration
             $table->unsignedBigInteger('quantity');
             $table->enum('average_rating',[1,2,3,4,5]);
             $table->enum('discount',range(1,100));
-            $table->unsignedDouble('weight');
+            $table->unsignedDecimal('weight');
             $table->unsignedBigInteger('sales_count')->default(0);
             $table->text('description');
-            $table->unsignedDouble('price');
+            $table->unsignedDecimal('price');
             $table->string('slug');
             $table->timestamps();
         });
