@@ -16,7 +16,7 @@ class Product extends Model
         'type',
         'imageUrl',
         'quantity',
-        'average_rating',
+        // 'average_rating',
         'discount',
         'weight',
         'description',
