@@ -13,7 +13,8 @@ class OrderManagementController extends Controller
     //
     function order_list()
     {
-        $order_list = OrderDetail::all()->paginate(10, ['id', 'created_at', 'user_id', 'total_price', 'approval_status']);
+        $order_list = OrderDetail::select(['id', 'created_at', 'user_id', 'total_price', 'approval_status'])
+            ->paginate(10);
         return response()->json($order_list);
     }
     function approve_orders(OrderDetail $orderDetail)
@@ -47,7 +48,8 @@ class OrderManagementController extends Controller
             return response()->json(['error' => $errorMessage], 500);
         }
     }
-    function cancel_order(OrderDetail $orderDetail){
+    function cancel_order(OrderDetail $orderDetail)
+    {
         try {
             $orderDetail->update(['approval_status' => "5"]);
             return response()->json(["message" => "Đơn hàng đã bị hủy"]);
@@ -56,13 +58,19 @@ class OrderManagementController extends Controller
             return response()->json(['error' => $errorMessage], 500);
         }
     }
-    function view_order_details(OrderDetail $orderDetail) {
+    function view_order_details(OrderDetail $orderDetail)
+    {
         $orderDetail = $orderDetail->load(['user']);
         return response()->json($orderDetail);
     }
-    function filter_status(Request $request) {
-       $approval_status =  in_array([1,2,3,4,5],$request->approval_status) ? $request->approval_status :0;
-       $order_list = OrderDetail::where('approval_status', $approval_status.'')->paginate(10, ['id', 'created_at', 'user_id', 'total_price', 'approval_status']);
+    function filter_status(Request $request)
+    {
+        $approval_status =  in_array($request->approval_status, [1, 2, 3, 4, 5]) ? $request->approval_status : 0;
+        $order_list = OrderDetail::where('approval_status', $approval_status)->paginate(10, ['id', 'created_at', 'user_id', 'total_price', 'approval_status']);
+
+        if ($order_list->isEmpty()) {
+            return response()->json(['message' => "Không có đơn hàng nào"]);
+        }
         return response()->json($order_list);
     }
 }
