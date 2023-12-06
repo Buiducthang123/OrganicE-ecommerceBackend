@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('imageUrl');
             $table->string('type')->nullable();
             $table->unsignedBigInteger('quantity');
-            $table->enum('average_rating',[1,2,3,4,5]);
+            $table->enum('average_rating',[1,2,3,4,5])->default(5);
             $table->enum('discount',range(1,100));
             $table->unsignedDecimal('weight');
             $table->unsignedBigInteger('sales_count')->default(0);

@@ -230,12 +230,12 @@ class ProductController extends Controller
             'imageUrl' => 'required|url',
             'quantity' => 'required|numeric',
             'average_rating' => [
-                'required',
+                'nullable',
                 Rule::in([1, 2, 3, 4, 5]),
             ],
             'discount' => [
                 'nullable',
-                Rule::in(range(1, 100)),
+                Rule::in(range(0, 100)),
             ],
             'type' => 'required|string',
             'weight' => 'required|numeric',
@@ -253,7 +253,7 @@ class ProductController extends Controller
             'imageUrl.url' => 'Please enter a valid URL for the image.',
             'quantity.required' => 'The quantity field is required.',
             'quantity.numeric' => 'The quantity must be a number.',
-            'average_rating.required' => 'The average rating field is required.',
+            // 'average_rating.required' => 'The average rating field is required.',
             'average_rating.in' => 'Invalid average rating selected.',
             'discount.nullable' => 'The discount must be nullable.',
             'discount.in' => 'Invalid discount value. It must be between 1 and 100.',
