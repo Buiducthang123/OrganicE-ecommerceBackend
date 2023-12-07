@@ -169,11 +169,11 @@ class ProductController extends Controller
     function searchProduct(Request $request)
     {
         $name = $request->input('name');
-        $products = Product::where('name', 'like', '%' . $name . '%')->get();
+        $products = Product::where('name', 'like', '%' . $name . '%')->paginate(10);
         if ($products->isEmpty()) {
             return response()->json([
                 "message" => "Không có sản phẩm nào được tìm thấy.",
-            ], 404);
+            ]);
         }
         return response()->json([
             "products" => $products
