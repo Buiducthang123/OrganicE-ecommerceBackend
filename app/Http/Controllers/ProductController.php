@@ -9,6 +9,7 @@ use Hamcrest\Arrays\IsArray;
 use Hamcrest\Type\IsObject;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -169,6 +170,20 @@ class ProductController extends Controller
     function searchProduct(Request $request)
     {
         $name = $request->input('name');
+        $products = Product::where('name', 'like', '%' . $name . '%')->get();
+        if ($products->isEmpty()) {
+            return response()->json([
+                "message" => "Không có sản phẩm nào được tìm thấy.",
+            ]);
+        }
+        return response()->json([
+            "products" => $products
+        ], 200);
+        
+    }
+    function admin_search_product(Request $request)
+    {
+        $name = $request->input('name');
         $products = Product::where('name', 'like', '%' . $name . '%')->paginate(10);
         if ($products->isEmpty()) {
             return response()->json([
@@ -178,13 +193,8 @@ class ProductController extends Controller
         return response()->json([
             "products" => $products
         ], 200);
+        
     }
-
-    function testFunc(Request $request, $id)
-    {
-        return response()->json($request->quantity);
-    }
-
     //Product quick view
     function quickView($id)
     {

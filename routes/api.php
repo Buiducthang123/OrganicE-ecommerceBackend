@@ -143,6 +143,8 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
        Route::put("/{id}",[ProductController::class,'update']); 
        Route::delete("/{id}",[ProductController::class,'destroy']); 
        Route::get('/show_products',[ProductController::class,'admin_show_products']);
+       //tìm kiếm products admin
+       Route::get('/admin_search_product',[ProductController::class,'admin_search_product']);
     });
     //QUản lý đơn hàng
     Route::prefix('order')->group(function () {
