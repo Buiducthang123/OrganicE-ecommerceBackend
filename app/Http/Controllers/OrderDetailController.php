@@ -191,4 +191,19 @@ class OrderDetailController extends Controller
         }
         return response()->json("Mày đéo đăng nhập à =(", 401);
     }
+    function filter_status_order(Request $request)
+    {
+        if (Auth::check()) {
+            $approval_status = in_array($request->approval_status, [0, 1, 2, 3, 4, 5]) ? $request->approval_status : 0;
+            $order_list = OrderDetail::where('user_id', Auth::id())->where('approval_status', $approval_status)->paginate(10, ['id', 'created_at', 'user_id', 'total_price', 'approval_status']);
+            
+            if ($order_list->isEmpty()) {
+                return response()->json(['message' => "Không có đơn hàng nào"]);
+            }
+        
+            return response()->json($order_list);
+        }
+        
+        return response()->json(["message"=>"Bạn chưa đăng nhập"], 401);
+    }
 }

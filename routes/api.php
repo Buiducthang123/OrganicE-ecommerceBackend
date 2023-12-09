@@ -93,7 +93,9 @@ Route::get('/blog/{id}', [BlogController::class, 'show']);
 Route::get('/blog/comments/{blog_id}', [BlogController::class, 'showComments']);
 Route::resource('/comment', CommentController::class)->middleware('auth:sanctum');
 //hóa đơn
-Route::resource('/order_detail', OrderDetailController::class)->middleware(['auth:sanctum']);
+Route::resource("/order_detail", OrderDetailController::class)->middleware('auth:sanctum');
+Route::get("/order_filter_status", [OrderDetailController::class, 'filter_status_order'])->middleware(['auth:sanctum']);
+
 //User API
 Route::resource('/user', UserController::class)->except('update')->middleware(['auth:sanctum']);
 Route::put("/user/update", [UserController::class, "update"])->middleware(['auth:sanctum']);
