@@ -65,7 +65,7 @@ class OrderManagementController extends Controller
     }
     function filter_status(Request $request)
     {
-        $approval_status =  in_array($request->approval_status, [1, 2, 3, 4, 5]) ? $request->approval_status : 0;
+        $approval_status =  in_array($request->approval_status, [0,1, 2, 3, 4, 5]) ? $request->approval_status : 0;
         $order_list = OrderDetail::where('approval_status', $approval_status)->paginate(10, ['id', 'created_at', 'user_id', 'total_price', 'approval_status']);
 
         if ($order_list->isEmpty()) {
