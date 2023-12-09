@@ -21,5 +21,8 @@ class RoleSeeder extends Seeder
             role::create([
                 'permission'=>"admin",
             ]);
+            role::create([
+                'permission'=>"shipper",
+            ]);
     }
 }
