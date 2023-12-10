@@ -19,7 +19,7 @@ class OrderManagementController extends Controller
     }
     function approve_orders(OrderDetail $orderDetail)
     {
-        return "ababab";
+        return response()->json("ababab");
         // try {
         //     $approval_status = (int) $orderDetail->approval_status;
 
