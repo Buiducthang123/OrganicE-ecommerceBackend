@@ -19,35 +19,35 @@ class OrderManagementController extends Controller
     }
     function approve_orders(OrderDetail $orderDetail)
     {
-        return response()->json("ababab");
-        // try {
-        //     $approval_status = (int) $orderDetail->approval_status;
+        // return response()->json("ababab");
+        try {
+            $approval_status = (int) $orderDetail->approval_status;
 
-        //     // return response()->json($approval_status);
-        //     switch ($approval_status) {
-        //         case 0:
-        //             $message = "Đơn hàng đã được duyệt";
-        //             break;
-        //         case 1:
-        //             $message = "Đơn hàng đã được duyệt sang trạng thái 2";
-        //             break;
-        //         case 2:
-        //             $message = "Đơn hàng đã được duyệt sang trạng thái 3";
-        //             break;
-        //         case 3:
-        //             $message = "Đơn hàng đã hoàn thành thành";
-        //             break;
-        //         case 4:
-        //             $message = "Đơn hàng đã hoàn thành";
-        //             return response()->json(["message" => $message]);
-        //     }
-        //     $newApprovalStatus = $approval_status + 1;
-        //     $orderDetail->update(['approval_status' => $newApprovalStatus . '']);
-        //     return response()->json(["message" => $message]);
-        // } catch (\Throwable $th) {
-        //     $errorMessage = $th->getMessage();
-        //     return response()->json(['error' => $errorMessage], 500);
-        // }
+            // return response()->json($approval_status);
+            switch ($approval_status) {
+                case 0:
+                    $message = "Đơn hàng đã được duyệt";
+                    break;
+                case 1:
+                    $message = "Đơn hàng đã được duyệt sang trạng thái 2";
+                    break;
+                case 2:
+                    $message = "Đơn hàng đã được duyệt sang trạng thái 3";
+                    break;
+                case 3:
+                    $message = "Đơn hàng đã hoàn thành thành";
+                    break;
+                case 4:
+                    $message = "Đơn hàng đã hoàn thành";
+                    return response()->json(["message" => $message]);
+            }
+            $newApprovalStatus = $approval_status + 1;
+            $orderDetail->update(['approval_status' => $newApprovalStatus . '']);
+            return response()->json(["message" => $message]);
+        } catch (\Throwable $th) {
+            $errorMessage = $th->getMessage();
+            return response()->json(['error' => $errorMessage], 500);
+        }
     }
     function cancel_order(OrderDetail $orderDetail)
     {
