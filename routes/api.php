@@ -153,7 +153,7 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         //Xem đơn hàng chưa duyệt
         Route::get('/',[OrderManagementController::class,'order_list']);
         //Duyệt đơn hàng
-        Route::patch('/approve_orders/{order_detail}',[OrderManagementController::class,"approve_orders"]);
+        Route::get('/approve_orders/{order_detail}',[OrderManagementController::class,"approve_orders"]);
         //Hủy đơn hàng
         Route::patch('/cancel_order/{order_detail}',[OrderManagementController::class,'cancel_order']);
         //Hiển thị chi tiết order
