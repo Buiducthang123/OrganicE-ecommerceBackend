@@ -14,7 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
-use App\Models\Comment;
+
 use Illuminate\Http\Request;
 // use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -153,9 +153,9 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         //Xem đơn hàng chưa duyệt
         Route::get('/',[OrderManagementController::class,'order_list']);
         //Duyệt đơn hàng
-        Route::put('/approve_orders/{order_detail}',[OrderManagementController::class,'approve_orders']);
+        Route::patch('/approve_orders/{order_detail}',[OrderManagementController::class,"approve_orders"]);
         //Hủy đơn hàng
-        Route::put('/cancel_order/{order_detail}',[OrderManagementController::class,'cancel_order']);
+        Route::patch('/cancel_order/{order_detail}',[OrderManagementController::class,'cancel_order']);
         //Hiển thị chi tiết order
         Route::get('view_order_details/{order_detail}',[OrderManagementController::class,'view_order_details']);
         //Lọc status 
