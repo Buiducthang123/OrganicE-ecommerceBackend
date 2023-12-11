@@ -98,46 +98,40 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $id)
     {
-        if (!$blog) {
-            return response()->json(["message" => "Blog không tồn tại"], 404);
+        $blog  = Blog::find($id);
+        if($blog){
+            // return response()->json($blog);
+            try {
+                $blog->update($request->all());
+                return response()->json(["message" => "Update successful"]);
+            } catch (\Throwable $th) {
+                $errors = $th->getMessage();
+                return response()->json(["message" => "Could not update: " . $errors]);
+            }
         }
-    
-        if ($request->has('title')) {
-            $blog->title = $request->title;
-        }
-    
-        if ($request->has('category_id')) {
-            $blog->category_id = $request->category_id;
-        }
-    
-        if ($request->has('content')) {
-            $blog->content = $request->content;
-        }
-    
-        if ($request->has('image')) {
-            $blog->image = $request->image;
-        }
-    
-        $blog->save();
-    
-        return response()->json(["message" => "Cập nhật bài viết thành công"], 200);
+        return response()->json(["message"=>"Lỗi khum sửa đc"]);
     }
     
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blog $blog)
+    public function destroy($id)
     {
-        //
+        $blog = Blog::find($id);
         if (!$blog) {
             return response()->json(["message"=> "Blog không tồn tại"],404);
         }
-        $blog->delete();
-        return response()->json(["message"=> "Xóa thành công:>"],200);
-
+        try {
+            $blog->delete();
+            return response()->json(["message"=>"Xóa blog" .$blog->title. "thành công"]);
+        } catch (\Throwable $th) {
+            $error = $th->getMessage();
+            return response()->json(["message"=>"Xóa khum thành công ".$error]);
+        }
+        
     }
     //Hiển thị cmt trong blog
     public function showComments(Request $request, $blog_id){

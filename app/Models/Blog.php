@@ -9,7 +9,7 @@ class Blog extends Model
 {
     use HasFactory;
     protected $appends = ['CmtNumber'];
-    
+    protected $fillable = ["category_id","title","image","content"];
     function category()
     {
         return $this->belongsTo(category::class);

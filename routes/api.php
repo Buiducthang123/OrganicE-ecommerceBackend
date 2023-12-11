@@ -85,9 +85,7 @@ Route::put('/ahahah/{id}', [ProductController::class, 'testFunc'])->middleware('
 
 
 //Route Blog
-Route::resource('/blog', BlogController::class, [
-    'except' => ['index', 'show']
-])->middleware(['auth:sanctum', 'roleMiddleware']);
+
 Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 Route::get('/blog/comments/{blog_id}', [BlogController::class, 'showComments']);
@@ -160,5 +158,10 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         Route::get('view_order_details/{order_detail}',[OrderManagementController::class,'view_order_details']);
         //Lọc status 
         Route::get('filter_status',[OrderManagementController::class,'filter_status']);
+    });
+    Route::prefix('blog')->group(function () {
+        Route::post('/create',[BlogController::class,'store']);
+        Route::put('/update/{id}',[BlogController::class,'update']);
+        Route::delete('/delete/{id}',[BlogController::class,'destroy']);
     });
 });
