@@ -13,9 +13,13 @@ class OrderManagementController extends Controller
     //
     function order_list()
     {
-        $order_list = OrderDetail::select(['id', 'created_at', 'user_id', 'total_price', 'approval_status'])
+        $order_list = OrderDetail::with(['user' => function ($query) {
+            $query->select('id', 'name', 'email','phone_number'); 
+        }])->select(['id', 'created_at', 'user_id', 'total_price', 'approval_status'])
             ->paginate(10);
+        
         return response()->json($order_list);
+        
     }
     function approve_orders(OrderDetail $orderDetail)
     {

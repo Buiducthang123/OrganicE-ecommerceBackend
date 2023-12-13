@@ -163,5 +163,6 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         Route::post('/create',[BlogController::class,'store']);
         Route::put('/update/{id}',[BlogController::class,'update']);
         Route::delete('/delete/{id}',[BlogController::class,'destroy']);
+        Route::get("/search_blog",[BlogController::class,'search_blog']);
     });
 });

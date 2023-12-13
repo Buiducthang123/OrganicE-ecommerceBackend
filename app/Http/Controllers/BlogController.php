@@ -137,8 +137,6 @@ class BlogController extends Controller
     public function showComments(Request $request, $blog_id){
         $limit = $request->limit?$request->limit:5;
         $count = Blog::find($blog_id)->comments()->count();
-        
-        
         $comments = Blog::find($blog_id)
         ->comments()
         ->select('comments.id as comment_id','users.name', 'users.email', 'users.avata', 'comments.created_at', 'content')
@@ -148,5 +146,10 @@ class BlogController extends Controller
             return response()->json(["comment"=>$comments,"count"=>$count]);
         }
         return response()->json(['message'=> 'Chưa có cmt nào'],404);
+    }
+    public function search_blog(Request $request) {
+        $content_search = $request->content_search?$request->content_search:"";
+        $blogs = Blog::where("title","like","%{$content_search}%")->get();
+        return response()->json($blogs);
     }
 }
