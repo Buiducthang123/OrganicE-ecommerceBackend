@@ -39,9 +39,9 @@ class OrderDetailController extends Controller
                     'address_shipping' => $value->address_shipping,
                     'payment_method' => $value->payment_method,
                     "approval_status" => $value->approval_status,
-                    "name"=>$value->name,
-                    "phone_number"=>$value->phone_number,
-                    "email"=>$value->email,
+                    "name" => $value->name,
+                    "phone_number" => $value->phone_number,
+                    "email" => $value->email,
                     'note' => $value->note,
                     'created_at' => $value->created_at,
                     'updated_at' => $value->updated_at,
@@ -89,9 +89,9 @@ class OrderDetailController extends Controller
                 'total_price' => 'required',
                 'address_shipping' => 'required|string',
                 'payment_method' => 'required|string',
-                'phone_number'=>'required|size:10|string',
-                'email'=>"required|email",
-                'name'=>"required|string",
+                'phone_number' => 'required|size:10|string',
+                'email' => "required|email",
+                'name' => "required|string",
                 'note' => 'nullable|string',
             ]);
 
@@ -109,7 +109,7 @@ class OrderDetailController extends Controller
             $order->address_shipping = $request->address_shipping;
             $order->payment_method = $request->payment_method;
             $order->email = $request->email;
-            $order->name= $request->name;
+            $order->name = $request->name;
             $order->phone_number = $request->phone_number;
             $order->note = $request->note;
             $order->save();
@@ -145,9 +145,9 @@ class OrderDetailController extends Controller
                 'address_shipping' => $orderDetail->address_shipping,
                 'payment_method' => $orderDetail->payment_method,
                 'approval_status' => $orderDetail->approval_status,
-                "phone_number"=>$orderDetail->phone_number,
-                "name"=>$orderDetail->name,
-                "email"=>$orderDetail->email,
+                "phone_number" => $orderDetail->phone_number,
+                "name" => $orderDetail->name,
+                "email" => $orderDetail->email,
                 'note' => $orderDetail->note,
                 'created_at' => $orderDetail->created_at,
                 'updated_at' => $orderDetail->updated_at,
@@ -196,22 +196,34 @@ class OrderDetailController extends Controller
         if (Auth::check()) {
             $approval_status = in_array($request->approval_status, [0, 1, 2, 3, 4, 5]) ? $request->approval_status : 0;
             $order_list = OrderDetail::where('user_id', Auth::id())->where('approval_status', $approval_status)->paginate(10, ['id', 'created_at', 'user_id', 'total_price', 'approval_status']);
-            
+
             if ($order_list->isEmpty()) {
                 return response()->json(['message' => "Không có đơn hàng nào"]);
             }
-        
+
             return response()->json($order_list);
         }
-        
-        return response()->json(["message"=>"Bạn chưa đăng nhập"], 401);
+
+        return response()->json(["message" => "Bạn chưa đăng nhập"], 401);
     }
 
     //Hủy đơn hàng cho user
-    function cancel_order($id) {
-        if(Auth::check()){
+    function cancel_order($id)
+    {
+        if (Auth::check()) {
             $order = OrderDetail::find($id);
+            if ($order->user_id == Auth::id()) {
+                try {
+                    // return response()->json($order);
+                    $order->update([
+                        'approval_status' => "5"
+                    ]);
+                    return response()->json(["message" => "Đơn hàng đã bị hủy"]);
+                } catch (\Throwable $th) {
+                    return response()->json(["message" => "Lỗi không thể hủy đơn hàng"]);
+                }
+            }
         }
-        return response()->json(["message"=>"Mày đăng nhập điii"]);
+        return response()->json(["message" => "Mày đăng nhập điii"]);
     }
 }

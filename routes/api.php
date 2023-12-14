@@ -89,10 +89,13 @@ Route::put('/ahahah/{id}', [ProductController::class, 'testFunc'])->middleware('
 Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 Route::get('/blog/comments/{blog_id}', [BlogController::class, 'showComments']);
+Route::get('/search_blog',[BlogController::class,'search_blog']);
 Route::resource('/comment', CommentController::class)->middleware('auth:sanctum');
 //hóa đơn
 Route::resource("/order_detail", OrderDetailController::class)->middleware('auth:sanctum');
 Route::get("/order_filter_status", [OrderDetailController::class, 'filter_status_order'])->middleware(['auth:sanctum']);
+//hủy đơn hàng
+Route::put("/cancel_order/{id}",[OrderDetailController::class, 'cancel_order'])->middleware(['auth:sanctum']);
 
 //User API
 Route::resource('/user', UserController::class)->except('update')->middleware(['auth:sanctum']);
@@ -163,6 +166,6 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         Route::post('/create',[BlogController::class,'store']);
         Route::put('/update/{id}',[BlogController::class,'update']);
         Route::delete('/delete/{id}',[BlogController::class,'destroy']);
-        Route::get("/search_blog",[BlogController::class,'search_blog']);
+        
     });
 });
