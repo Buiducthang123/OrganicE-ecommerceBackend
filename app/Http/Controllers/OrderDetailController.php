@@ -206,4 +206,12 @@ class OrderDetailController extends Controller
         
         return response()->json(["message"=>"Bạn chưa đăng nhập"], 401);
     }
+
+    //Hủy đơn hàng cho user
+    function cancel_order($id) {
+        if(Auth::check()){
+            $order = OrderDetail::find($id);
+        }
+        return response()->json(["message"=>"Mày đăng nhập điii"]);
+    }
 }
