@@ -14,9 +14,10 @@ class OrderManagementController extends Controller
     function order_list()
     {
         $order_list = OrderDetail::with(['user' => function ($query) {
-            $query->select('id', 'name', 'email','phone_number'); 
-        }])->select(['id', 'created_at', 'user_id', 'total_price', 'approval_status'])
-            ->paginate(10);
+            $query->select('id', 'name', 'email', 'phone_number');
+        }])
+        ->select(['id', 'created_at', 'user_id', 'total_price', 'approval_status', 'products_order'])
+        ->paginate(10)->makeHidden(['products_order']);;
         
         return response()->json($order_list);
         

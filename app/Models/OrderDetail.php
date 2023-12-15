@@ -10,6 +10,7 @@ class OrderDetail extends Model
     use HasFactory;
 
     protected $fillable = ['approval_status'] ;
+    protected $appends = ['count_products'];
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -22,5 +23,9 @@ class OrderDetail extends Model
     
     public function getProductsOrderAttribute() {
         return json_decode($this->attributes['products_order'], true);
+    }
+    function getCountProductsAttribute() {
+        $products = json_decode($this->attributes['products_order'], true);
+        return count($products);
     }
 }
