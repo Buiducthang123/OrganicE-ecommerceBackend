@@ -27,7 +27,7 @@ class StatisticalManagementController extends Controller
         $totalOrder = ["total" => OrderDetail::count()];
 
         foreach ($order_status as $key => $label) {
-            $totalOrder[$label] = OrderDetail::where('approval_status', $key)->count();
+            $totalOrder[$label] = OrderDetail::where('approval_status', $key+1)->count();
         }
         //Tổng sản phẩm
         $total_products = Product::count();
