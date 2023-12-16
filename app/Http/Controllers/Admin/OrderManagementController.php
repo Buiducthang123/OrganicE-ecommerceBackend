@@ -74,8 +74,8 @@ class OrderManagementController extends Controller
         $approval_status =  in_array($request->approval_status, [0,1, 2, 3, 4, 5]) ? $request->approval_status : 0;
         $order_list = OrderDetail::with(['user' => function ($query) {
             $query->select('id', 'name', 'email','phone_number'); 
-        }])->where('approval_status', $approval_status)->select(['id', 'created_at', 'user_id', 'total_price', 'approval_status'])
-            ->paginate(10);
+        }])->where('approval_status', $approval_status)->select(['id', 'created_at', 'user_id', 'total_price', 'approval_status','products_order'])
+            ->paginate(10)->makeHidden('products_order');
         if ($order_list->isEmpty()) {
             return response()->json(['message' => "Không có đơn hàng nào"]);
         }
