@@ -43,7 +43,6 @@ class BlogController extends Controller
             "category_id.in_array" => "Không tồn tại category",
             "image.required" => "Hình ảnh chính không được bỏ trống",
             "content.required" => "Nội dung blog không được để trống",
-            
         ];
 
         $validator = Validator::make($request->all(), [
@@ -65,7 +64,7 @@ class BlogController extends Controller
         $blog = new Blog();
         $blog->title = $request->title;
         $blog->category_id = $request->category_id;
-        $blog->content = $request->content;
+        $blog->content = json_encode($request->content);
         $blog->image = $request->image;
         $blog->save();
         if ($blog->id) {
