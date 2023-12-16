@@ -43,7 +43,7 @@ class BlogController extends Controller
             "category_id.in_array" => "Không tồn tại category",
             "image.required" => "Hình ảnh chính không được bỏ trống",
             "content.required" => "Nội dung blog không được để trống",
-            "content.min" => "Nội dung blog quá ngắn, bắt buộc > 100 ký tự"
+            
         ];
 
         $validator = Validator::make($request->all(), [
@@ -54,7 +54,7 @@ class BlogController extends Controller
                 }
             }],
             "image" => "required",
-            "content" => "required|min:100"
+            "content" => "required"
         ], $message);
 
 
@@ -102,7 +102,6 @@ class BlogController extends Controller
     {
         $blog  = Blog::find($id);
         if($blog){
-            // return response()->json($blog);
             try {
                 $blog->update($request->all());
                 return response()->json(["message" => "Update successful"]);
