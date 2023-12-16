@@ -17,7 +17,8 @@ class OrderManagementController extends Controller
             $query->select('id', 'name', 'email', 'phone_number');
         }])
         ->select(['id', 'created_at', 'user_id', 'total_price', 'approval_status', 'products_order'])
-        ->paginate(10)->makeHidden(['products_order']);;
+        ->paginate(10);
+        $order_list->getCollection()->makeHidden(['products_order']);
         
         return response()->json($order_list);
         
@@ -71,14 +72,20 @@ class OrderManagementController extends Controller
     }
     function filter_status(Request $request)
     {
-        $approval_status =  in_array($request->approval_status, [0,1, 2, 3, 4, 5]) ? $request->approval_status : 0;
+        $approval_status =  $request->approval_status ? $request->approval_status : "0";
         $order_list = OrderDetail::with(['user' => function ($query) {
-            $query->select('id', 'name', 'email','phone_number'); 
-        }])->where('approval_status', $approval_status)->select(['id', 'created_at', 'user_id', 'total_price', 'approval_status','products_order'])
-            ->paginate(10)->makeHidden('products_order');
+            $query->select('id', 'name', 'email', 'phone_number');
+        }])->where('approval_status', $approval_status)
+            ->select(['id', 'created_at', 'user_id', 'total_price', 'approval_status', 'products_order'])
+            ->paginate(10);
+        
+        // Ẩn trường products_order sau khi lấy kết quả phân trang
+        $order_list->getCollection()->makeHidden('products_order');
+        
         if ($order_list->isEmpty()) {
             return response()->json(['message' => "Không có đơn hàng nào"]);
         }
         return response()->json($order_list);
+        
     }
 }
