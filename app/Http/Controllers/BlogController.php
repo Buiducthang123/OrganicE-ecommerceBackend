@@ -149,7 +149,9 @@ class BlogController extends Controller
     }
     public function search_blog(Request $request) {
         $content_search = $request->content_search?$request->content_search:"";
-        $blogs = Blog::where("title","like","%{$content_search}%")->paginate(10);
+        $blogs = Blog::with(['category'=>function ($query) {
+            $query->select('id','name','slug');
+        }])->where("title","like","%{$content_search}%")->paginate(10);
         return response()->json($blogs);
     }
 }
