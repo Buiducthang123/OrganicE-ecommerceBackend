@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Admin\OrderManagementController;
+use App\Http\Controllers\Admin\StatisticalManagementController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BillingAddressController;
 use App\Http\Controllers\BlogController;
@@ -167,5 +168,10 @@ Route::prefix("admin")->middleware(['auth:sanctum',"roleMiddleware"])->group(fun
         Route::put('/update/{id}',[BlogController::class,'update']);
         Route::delete('/delete/{id}',[BlogController::class,'destroy']);
         
+    });
+
+    //Thống kê (Dashboard)
+    Route::prefix('dashboard')->group(function () {
+       Route::get("/",[StatisticalManagementController::class,'index']);
     });
 });
