@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('category_id');
             $table->string('title');
             $table->string('image');
-            $table->text('content');
+            $table->json('content');
             $table->timestamps();
         });
     }

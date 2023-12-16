@@ -22,7 +22,7 @@ class BlogSeeder extends Seeder
                 'category_id'=>$faker->randomElement($categories_id),
                 'title'=>$faker->title(),
                 'image'=>$faker->imageUrl(),
-                'content'=>$faker->paragraphs(5, true),
+                'content'=>json_encode($faker->paragraphs(5, true)),
             ]);
         }
     }
