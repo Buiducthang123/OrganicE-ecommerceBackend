@@ -48,37 +48,110 @@
 ##Các api và cách sử dụng
 <h6>Method: Get</h6>
     <ul>
-        <li>api/getCurrentUser: Trả về thông tin user hiện tại đang đăng nhập</li>
-        <h6>categories api</h6>
-        <li>api/categories: Trả về ra danh sách các categories</li>
-        <li>api/categories/{category}: Trả về danh sách tất cả các sản phẩm trong category</li>
-        <h6>products api</h6>
-        <li>api/product: Trả về danh sách tất cả product</li>
-        <li>api/product/{product}: Xem chi tiết sản phẩm</li>
-        <li>api/products/bestSellerProducts: Trả về danh sách các sản phẩm bán chạy nhât</li>
-        <li>api/products/featuredProducts: Trả về danh sách các sản phẩm nổi bật</li>
-        <li>api/products/filterProducts: Lọc sản phẩm</li>
-        <li>api/products/hotDeals: Trả về danh sách sản phẩm có ưu đãi lớn</li>
-        <li>api/products/quickView/{id}: Trả về thông tin nhanh của sản phẩm</li>
-        <li>api/products/searchProduct: Tìm kiếm sản phẩm</li>
-        <li>api/products/topRated: Trả về danh sách của sản phẩm có đánh giá hàng đầu</li>
-        <h6>review api</h6>
-        <li>api/reviews: Trả về đánh giá của khách hàng về trang web</li>
-        <h6>blog api</h6>
-        <li>api/blog: Trả về danh sách tất cả các blog </li>
-        <li>api/blog/comments/{blog_id}: Hiển thị comment của 1 blog </li>
-        <li>api/blog/{id}: HIển thị chi tiết blog</li>
-        <li>api/search_blog: Tìm kiếm blog theo tên</li>
-        <h6>cart api</h6>
-        <li>api/cart: Trả về các sản phẩm trong giỏ hàng của user đang đăng nhập</li>
-        <li>api/carts/quick_infor: Trả về thông tin nhanh của giỏ hàng</li>
-        <h6>order details api</h6>
-        <li>api/order_detail: Trả về chi tiết tất cả hóa đơn của user đang đăng nhập</li>
-        <li>api/order_detail/{order_detail}: Xem chi tiết hóa đơn</li>
-        <li>api/order_filter_status: Lọc phân loại hóa đơn theo trạng thái</li>
-        <h6>user api</h6>
-        <li>api/getCurrentUser: Lấy ra thông tin user đang đăng nhập</li>
-        <h6>wish_list api</h6>
-        <li>api/wish_list: Trả về danh sách sản phẩm yêu thích của User yêu thích</li>
+        <li><h6>Categories API</h6></li>
+            <ul>
+                <li>api/categories: Trả về danh sách các categories</li>
+                <li>api/categories/{category}: Trả về danh sách tất cả các sản phẩm trong category</li>
+            </ul>
+        <li><h6>Products API</h6></li>
+            <ul>
+                <li>api/product: Trả về danh sách tất cả product</li>
+                <li>api/product/{product}: Xem chi tiết sản phẩm</li>
+                <li>api/products/bestSellerProducts: Trả về danh sách các sản phẩm bán chạy nhất</li>
+                <li>api/products/featuredProducts: Trả về danh sách các sản phẩm nổi bật</li>
+                <li>api/products/filterProducts: Lọc sản phẩm</li>
+                <li>api/products/hotDeals: Trả về danh sách sản phẩm có ưu đãi lớn</li>
+                <li>api/products/quickView/{id}: Trả về thông tin nhanh của sản phẩm</li>
+                <li>api/products/searchProduct: Tìm kiếm sản phẩm</li>
+                <li>api/products/topRated: Trả về danh sách của sản phẩm có đánh giá hàng đầu</li>
+            </ul>
+        <li><h6>Review API</h6></li>
+            <ul>
+                <li>api/reviews: Trả về đánh giá của khách hàng về trang web</li>
+            </ul>
+        <li><h6>Blog API</h6></li>
+            <ul>
+                <li>api/blog: Trả về danh sách tất cả các blog </li>
+                <li>api/blog/comments/{blog_id}: Hiển thị comment của 1 blog </li>
+                <li>api/blog/{id}: Hiển thị chi tiết blog</li>
+                <li>api/search_blog: Tìm kiếm blog theo tên</li>
+            </ul>
+        <li><h6>Cart API</h6></li>
+            <ul>
+                <li>api/cart: Trả về các sản phẩm trong giỏ hàng của user đang đăng nhập</li>
+                <li>api/carts/quick_infor: Trả về thông tin nhanh của giỏ hàng</li>
+            </ul>
+        <li><h6>Order Details API</h6></li>
+            <ul>
+                <li>api/order_detail: Trả về chi tiết tất cả hóa đơn của user đang đăng nhập</li>
+                <li>api/order_detail/{order_detail}: Xem chi tiết hóa đơn</li>
+                <li>api/order_filter_status: Lọc phân loại hóa đơn theo trạng thái</li>
+            </ul>
+        <li><h6>User API</h6></li>
+            <ul>
+                <li>api/getCurrentUser: Lấy ra thông tin user đang đăng nhập</li>
+            </ul>
+        <li><h6>Wish List API</h6></li>
+            <ul>
+                <li>api/wish_list: Trả về danh sách sản phẩm yêu thích của User yêu thích</li>
+            </ul>
     </ul>
 
+<h6>Method: Post</h6>
+    <ul>
+        <li><h6>User</h6></li>
+        <ul>
+            <li>api/cartItem: Thêm sản phẩm vào giỏ hàng</li>
+            <li>api/comment: Thêm comment và blog</li>
+            <li>api/login: Đăng nhập</li>
+            <li>api/order_detail: Tạo đơn hàng mới</li>
+            <li>api/register: Đăng ký</li>
+            <li>api/wish_list: Thêm sản phẩm vào danh sách yêu thích</li>
+        </ul>
+        <li><h6>Admin</h6></li>
+        <ul>
+            <li>api/admin/blog/create: Tạo mới 1 blog</li>
+            <li>api/admin/category: Tạo mới 1 categories</li>
+            <li>api/admin/product: Tạo mới 1 products</li>
+        </ul>
+    </ul>
+<h6>Method: PUT</h6>
+    <ul>
+        <li><h6>Admin</h6></li>
+            <ul>
+                <li>api/admin/blog/update/{id}: Cập nhật blog</li>
+                <li>api/admin/category/{id}: Cập nhật category</li>
+                <li>api/admin/order/approve_orders/{order_detail}: Cập nhật trạng thái đơn hàng</li>
+                <li>api/admin/order/cancel_order/{order_detail}: Hủy đơn hàng</li>
+                <li>api/admin/product/{id}: Cập nhật thông tin sản phẩm</li>
+                <li>api/admin/user/ban_user: Cấm tài khoản user truy cập</li>
+                <li>api/admin/user/grant_permissions: Cấp quyền trở thành admin cho 1 user</li>
+                <li>api/billing_address/update: Cập nhật địa chỉ thanh toán</li>
+            </ul>
+        <li><h6>User</h6></li>
+            <ul>
+                <li>api/cancel_order/{id}: Hủy đơn hàng</li>
+                <li>api/cartItem/{cartItem}: Cập nhật sản phẩm trong giỏ hàng</li>
+                <li>api/comment/{comment}: Chỉnh sửa comment</li>
+                <li>api/user/change_password: Thay đổi mật khẩu</li>
+                <li>api/user/update: Cập nhật thông tin user</li>
+            </ul>
+    </ul>
+<h6>Method: DELETE</h6>
+    <ul>
+        <li><h6>Admin</h6></li>
+            <ul>
+                <li>api/admin/blog/delete/{id}: Xóa 1 blog</li>
+                <li>api/admin/category/{id}: Xóa 1 category</li>
+                <li>api/admin/product/{id}: Xóa 1 product</li>
+                <li>api/admin/user/delete_user/{user_id}: Xóa 1 user</li>
+            </ul>
+        <li><h6>User</h6></li>
+            <ul>
+                <li>api/cartItem/{product_id}: Xóa sản phẩm khỏi giỏ hàng</li>
+                <li>api/comment/{comment}: Xóa comment</li>
+                <li>api/logout: Đăng xuất</li>
+                <li>api/order_detail/{order_detail}: Xóa bỏ đơn hàng</li>
+                <li>api/wish_list/{wish_list}: Loại xóa sản phẩm khỏi danh sách yêu thích</li>
+            </ul>
+    </ul>
