@@ -49,10 +49,10 @@
 <h6>Method: Get</h6>
     <ul>
         <li>api/getCurrentUser: Trả về thông tin user hiện tại đang đăng nhập</li>
-        #categories api
+        <h6>categories api</h6>
         <li>api/categories: Trả về ra danh sách các categories</li>
         <li>api/categories/{category}: Trả về danh sách tất cả các sản phẩm trong category</li>
-        #products api
+        <h6>products api</h6>
         <li>api/product: Trả về danh sách tất cả product</li>
         <li>api/product/{product}: Xem chi tiết sản phẩm</li>
         <li>api/products/bestSellerProducts: Trả về danh sách các sản phẩm bán chạy nhât</li>
@@ -62,23 +62,23 @@
         <li>api/products/quickView/{id}: Trả về thông tin nhanh của sản phẩm</li>
         <li>api/products/searchProduct: Tìm kiếm sản phẩm</li>
         <li>api/products/topRated: Trả về danh sách của sản phẩm có đánh giá hàng đầu</li>
-        #review
+        <h6>review api</h6>
         <li>api/reviews: Trả về đánh giá của khách hàng về trang web</li>
-        #blog
+        <h6>blog api</h6>
         <li>api/blog: Trả về danh sách tất cả các blog </li>
         <li>api/blog/comments/{blog_id}: Hiển thị comment của 1 blog </li>
         <li>api/blog/{id}: HIển thị chi tiết blog</li>
         <li>api/search_blog: Tìm kiếm blog theo tên</li>
-        #cart
+        <h6>cart api</h6>
         <li>api/cart: Trả về các sản phẩm trong giỏ hàng của user đang đăng nhập</li>
         <li>api/carts/quick_infor: Trả về thông tin nhanh của giỏ hàng</li>
-        #order details
+        <h6>order details api</h6>
         <li>api/order_detail: Trả về chi tiết tất cả hóa đơn của user đang đăng nhập</li>
         <li>api/order_detail/{order_detail}: Xem chi tiết hóa đơn</li>
         <li>api/order_filter_status: Lọc phân loại hóa đơn theo trạng thái</li>
-        #user
+        <h6>user api</h6>
         <li>api/getCurrentUser: Lấy ra thông tin user đang đăng nhập</li>
-        #wish_list
+        <h6>wish_list api</h6>
         <li>api/wish_list: Trả về danh sách sản phẩm yêu thích của User yêu thích</li>
     </ul>
 
