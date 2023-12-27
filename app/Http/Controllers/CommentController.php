@@ -99,10 +99,13 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        $bool =  $comment->delete();
-        if ($bool) {
-            return response()->json(["message" => "Xóa thành công"], 200);
+        if (Auth::check()) {
+            if (Auth::user()->id != $comment->user_id) {
+                return response()->json(['error' => 'Lõiii'], 400);
+            }
+            $comment->delete();
+            return response()->json(['message' => 'Đã xóa'], 200);
         }
-        return response()->json(["message" => "lỗi"], 500);
+        return response()->json("Mày chưa đăng nhập à =(", 401);
     }
 }
